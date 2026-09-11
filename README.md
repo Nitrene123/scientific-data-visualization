@@ -38,6 +38,83 @@
 
 完整模板 ID、适用问题、数据要求和选图边界见 `references/figure-catalog.md` 与 `references/visualization-catalog.md`。
 
+## 模板预览
+
+以下缩略图直接对应 `assets/previews/` 中的 50 个模板预览文件；点击图片可查看原图。
+
+<table>
+<tr>
+<td><a href="assets/previews/3d_bar_heat_projection_replica.png"><img src="assets/previews/3d_bar_heat_projection_replica.png" alt="3d-bar-heat-projection" width="180"></a><br><sub><code>3d-bar-heat-projection</code></sub></td>
+<td><a href="assets/previews/3d_bar_heatmap_replica.png"><img src="assets/previews/3d_bar_heatmap_replica.png" alt="3d-bar-heatmap" width="180"></a><br><sub><code>3d-bar-heatmap</code></sub></td>
+<td><a href="assets/previews/3d_response_surface_replica.png"><img src="assets/previews/3d_response_surface_replica.png" alt="3d-response-surface" width="180"></a><br><sub><code>3d-response-surface</code></sub></td>
+<td><a href="assets/previews/3d_scatter_replica.png"><img src="assets/previews/3d_scatter_replica.png" alt="3d-scatter" width="180"></a><br><sub><code>3d-scatter</code></sub></td>
+<td><a href="assets/previews/3d_vector_field_replica.png"><img src="assets/previews/3d_vector_field_replica.png" alt="3d-vector-field" width="180"></a><br><sub><code>3d-vector-field</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/3d_volume_replica.png"><img src="assets/previews/3d_volume_replica.png" alt="3d-volume" width="180"></a><br><sub><code>3d-volume</code></sub></td>
+<td><a href="assets/previews/bland_altman_replica.png"><img src="assets/previews/bland_altman_replica.png" alt="bland-altman" width="180"></a><br><sub><code>bland-altman</code></sub></td>
+<td><a href="assets/previews/calibration_reliability_replica.png"><img src="assets/previews/calibration_reliability_replica.png" alt="calibration-reliability" width="180"></a><br><sub><code>calibration-reliability</code></sub></td>
+<td><a href="assets/previews/confusion_matrix_replica.png"><img src="assets/previews/confusion_matrix_replica.png" alt="confusion-matrix" width="180"></a><br><sub><code>confusion-matrix</code></sub></td>
+<td><a href="assets/previews/correlation_pairgrid_replica.png"><img src="assets/previews/correlation_pairgrid_replica.png" alt="correlation-pairgrid" width="180"></a><br><sub><code>correlation-pairgrid</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/cv_roc_ci_replica.png"><img src="assets/previews/cv_roc_ci_replica.png" alt="cv-roc-ci" width="180"></a><br><sub><code>cv-roc-ci</code></sub></td>
+<td><a href="assets/previews/det_curve_replica.png"><img src="assets/previews/det_curve_replica.png" alt="det-curve" width="180"></a><br><sub><code>det-curve</code></sub></td>
+<td><a href="assets/previews/enrichment_dotplot_replica.png"><img src="assets/previews/enrichment_dotplot_replica.png" alt="enrichment-dotplot" width="180"></a><br><sub><code>enrichment-dotplot</code></sub></td>
+<td><a href="assets/previews/event_timeline_replica.png"><img src="assets/previews/event_timeline_replica.png" alt="event-timeline" width="180"></a><br><sub><code>event-timeline</code></sub></td>
+<td><a href="assets/previews/expression_heatmap_replica.png"><img src="assets/previews/expression_heatmap_replica.png" alt="expression-heatmap" width="180"></a><br><sub><code>expression-heatmap</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/forest_plot_replica.png"><img src="assets/previews/forest_plot_replica.png" alt="forest-plot" width="180"></a><br><sub><code>forest-plot</code></sub></td>
+<td><a href="assets/previews/grouped_circular_heatmap_replica.png"><img src="assets/previews/grouped_circular_heatmap_replica.png" alt="grouped-circular-heatmap" width="180"></a><br><sub><code>grouped-circular-heatmap</code></sub></td>
+<td><a href="assets/previews/grouped_comparison_replica.png"><img src="assets/previews/grouped_comparison_replica.png" alt="grouped-comparison" width="180"></a><br><sub><code>grouped-comparison</code></sub></td>
+<td><a href="assets/previews/grouped_corr_split_violin_replica.png"><img src="assets/previews/grouped_corr_split_violin_replica.png" alt="grouped-corr-split-violin" width="180"></a><br><sub><code>grouped-corr-split-violin</code></sub></td>
+<td><a href="assets/previews/gsea_curve_replica.png"><img src="assets/previews/gsea_curve_replica.png" alt="gsea-curve" width="180"></a><br><sub><code>gsea-curve</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/hexbin_fit_replica.png"><img src="assets/previews/hexbin_fit_replica.png" alt="hexbin-fit" width="180"></a><br><sub><code>hexbin-fit</code></sub></td>
+<td><a href="assets/previews/learning_curve_replica.png"><img src="assets/previews/learning_curve_replica.png" alt="learning-curve" width="180"></a><br><sub><code>learning-curve</code></sub></td>
+<td><a href="assets/previews/ma_plot_replica.png"><img src="assets/previews/ma_plot_replica.png" alt="ma-plot" width="180"></a><br><sub><code>ma-plot</code></sub></td>
+<td><a href="assets/previews/manhattan_plot_replica.png"><img src="assets/previews/manhattan_plot_replica.png" alt="manhattan-plot" width="180"></a><br><sub><code>manhattan-plot</code></sub></td>
+<td><a href="assets/previews/multiclass_shap_combo_replica.png"><img src="assets/previews/multiclass_shap_combo_replica.png" alt="multiclass-shap-combo" width="180"></a><br><sub><code>multiclass-shap-combo</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/nature_chord_diagram_replica.png"><img src="assets/previews/nature_chord_diagram_replica.png" alt="nature-chord-diagram" width="180"></a><br><sub><code>nature-chord-diagram</code></sub></td>
+<td><a href="assets/previews/network_graph_replica.png"><img src="assets/previews/network_graph_replica.png" alt="network-graph" width="180"></a><br><sub><code>network-graph</code></sub></td>
+<td><a href="assets/previews/ohlc_candlestick_replica.png"><img src="assets/previews/ohlc_candlestick_replica.png" alt="ohlc-candlestick" width="180"></a><br><sub><code>ohlc-candlestick</code></sub></td>
+<td><a href="assets/previews/ordination_pcoa_replica.png"><img src="assets/previews/ordination_pcoa_replica.png" alt="ordination-pcoa" width="180"></a><br><sub><code>ordination-pcoa</code></sub></td>
+<td><a href="assets/previews/paired_raincloud_replica.png"><img src="assets/previews/paired_raincloud_replica.png" alt="paired-raincloud" width="180"></a><br><sub><code>paired-raincloud</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/parallel_coordinates_replica.png"><img src="assets/previews/parallel_coordinates_replica.png" alt="parallel-coordinates" width="180"></a><br><sub><code>parallel-coordinates</code></sub></td>
+<td><a href="assets/previews/precision_recall_curve_replica.png"><img src="assets/previews/precision_recall_curve_replica.png" alt="precision-recall-curve" width="180"></a><br><sub><code>precision-recall-curve</code></sub></td>
+<td><a href="assets/previews/prediction_marginal_grid_replica.png"><img src="assets/previews/prediction_marginal_grid_replica.png" alt="prediction-marginal-grid" width="180"></a><br><sub><code>prediction-marginal-grid</code></sub></td>
+<td><a href="assets/previews/radar_profile_replica.png"><img src="assets/previews/radar_profile_replica.png" alt="radar-profile" width="180"></a><br><sub><code>radar-profile</code></sub></td>
+<td><a href="assets/previews/residual_diagnostics_replica.png"><img src="assets/previews/residual_diagnostics_replica.png" alt="residual-diagnostics" width="180"></a><br><sub><code>residual-diagnostics</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/rf_tpe_surface_replica.png"><img src="assets/previews/rf_tpe_surface_replica.png" alt="rf-tpe-surface" width="180"></a><br><sub><code>rf-tpe-surface</code></sub></td>
+<td><a href="assets/previews/ridge_plot_replica.png"><img src="assets/previews/ridge_plot_replica.png" alt="ridge-plot" width="180"></a><br><sub><code>ridge-plot</code></sub></td>
+<td><a href="assets/previews/sankey_flow_replica.png"><img src="assets/previews/sankey_flow_replica.png" alt="sankey-flow" width="180"></a><br><sub><code>sankey-flow</code></sub></td>
+<td><a href="assets/previews/spatial_map_replica.png"><img src="assets/previews/spatial_map_replica.png" alt="spatial-map" width="180"></a><br><sub><code>spatial-map</code></sub></td>
+<td><a href="assets/previews/sunburst_hierarchy_replica.png"><img src="assets/previews/sunburst_hierarchy_replica.png" alt="sunburst-hierarchy" width="180"></a><br><sub><code>sunburst-hierarchy</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/survival_km_replica.png"><img src="assets/previews/survival_km_replica.png" alt="survival-km" width="180"></a><br><sub><code>survival-km</code></sub></td>
+<td><a href="assets/previews/taylor_diagram_replica.png"><img src="assets/previews/taylor_diagram_replica.png" alt="taylor-diagram" width="180"></a><br><sub><code>taylor-diagram</code></sub></td>
+<td><a href="assets/previews/ternary_composition_replica.png"><img src="assets/previews/ternary_composition_replica.png" alt="ternary-composition" width="180"></a><br><sub><code>ternary-composition</code></sub></td>
+<td><a href="assets/previews/time_series_ribbon_replica.png"><img src="assets/previews/time_series_ribbon_replica.png" alt="time-series-ribbon" width="180"></a><br><sub><code>time-series-ribbon</code></sub></td>
+<td><a href="assets/previews/treemap_hierarchy_replica.png"><img src="assets/previews/treemap_hierarchy_replica.png" alt="treemap-hierarchy" width="180"></a><br><sub><code>treemap-hierarchy</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/umap_clusters_replica.png"><img src="assets/previews/umap_clusters_replica.png" alt="umap-clusters" width="180"></a><br><sub><code>umap-clusters</code></sub></td>
+<td><a href="assets/previews/upset_plot_replica.png"><img src="assets/previews/upset_plot_replica.png" alt="upset-plot" width="180"></a><br><sub><code>upset-plot</code></sub></td>
+<td><a href="assets/previews/urban_park_cooling_combo_replica.png"><img src="assets/previews/urban_park_cooling_combo_replica.png" alt="urban-park-cooling-combo" width="180"></a><br><sub><code>urban-park-cooling-combo</code></sub></td>
+<td><a href="assets/previews/volcano_plot_replica.png"><img src="assets/previews/volcano_plot_replica.png" alt="volcano-plot" width="180"></a><br><sub><code>volcano-plot</code></sub></td>
+<td><a href="assets/previews/waterfall_contribution_replica.png"><img src="assets/previews/waterfall_contribution_replica.png" alt="waterfall-contribution" width="180"></a><br><sub><code>waterfall-contribution</code></sub></td>
+</tr>
+</table>
+
 ## 输出格式
 
 | 格式 | 适用场景 | 说明 |
