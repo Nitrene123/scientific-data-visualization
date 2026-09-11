@@ -1,6 +1,6 @@
 # 科学データ可視化
 
-[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+[简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 Codex、Claude などの Agent 向けの再現可能な科学データ可視化スキルです。50 個の実行可能な Matplotlib テンプレート、グラフ選択ルール、元の互換カラーパレット、PNG/PDF/SVG 出力を含みます。
 

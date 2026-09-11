@@ -1,6 +1,6 @@
 # 과학 데이터 시각화
 
-[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+[简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 Codex, Claude 및 기타 Agent를 위한 재현 가능한 과학 데이터 시각화 스킬입니다. 실행 가능한 Matplotlib 템플릿 50개, 차트 선택 규칙, 기존 호환 색상 팔레트, PNG/PDF/SVG 출력을 제공합니다.
 

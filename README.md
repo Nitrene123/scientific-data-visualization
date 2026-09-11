@@ -1,37 +1,37 @@
-# 科研数据可视化
+# Scientific Data Visualization
 
-[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+[简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 50 个可直接运行的 Matplotlib 模板、选图规则、原始兼容色板和 PNG/PDF/SVG 导出流程。
+A reproducible Agent Skill for scientific data visualization with 50 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
 
-## 主要功能
+## Features
 
-- 覆盖比较、分布、相关、降维、分类评估、生存分析、组学分析、时间序列、空间/网络和三维数据等常见科研图形。
-- 内置 3D 柱阵、热力投影、响应面、散点、体数据和向量场模板，只有在第三维具有明确科学含义时才推荐使用。
-- 默认使用项目原有的兼容色板：蓝绿主色、暖红/橙强调色和中性灰，并保留 `viridis`、`magma`、`RdBu_r` 等连续色图。
-- 所有模板使用确定性模拟数据，统一导出高清 PNG、PDF 和 SVG，便于预览、修改和论文排版。
-- 提供选图边界与科研制图质控说明，避免把装饰性图形误当作数据证据。
+- Covers comparison, distribution, correlation, dimensionality reduction, model evaluation, survival analysis, omics, time series, spatial/network data, and 3D data.
+- Includes 3D bar matrices, heatmap projections, response surfaces, 3D scatter, volume, and vector-field templates; use 3D only when the third dimension has a real scientific meaning.
+- Keeps the original project palette by default and provides `viridis`, `magma`, and `RdBu_r` for continuous values.
+- Includes deterministic example data, 50 preview images, and reproducible scripts that export PNG, PDF, and SVG.
+- Provides chart-selection boundaries and scientific figure quality-control guidance.
 
-## 使用方式
+## Usage
 
-1. 将本仓库作为一个 skill 目录安装到 Agent 的 skills 目录。
-2. 阅读 `SKILL.md`，根据数据结构和研究问题选择模板。
-3. 在 Windows 中运行：
+1. Install this repository as a skill directory in the Agent's skills directory.
+2. Read `SKILL.md` and choose a template based on the data structure and research question.
+3. On Windows, run:
 
    ```bash
    python scripts/render_template.py --list
    python scripts/render_template.py 3d-bar-heat-projection
    ```
 
-4. 渲染结果默认写入当前工作区的 `绘图复刻/outputs/`，模板脚本复制到 `绘图复刻/scripts/`。
+4. Outputs are written to `绘图复刻/outputs/` by default, and the template script is copied to `绘图复刻/scripts/`.
 
-## 自动加载到 Codex、Claude 和其他 Agent
+## Automatic loading in Codex, Claude, and other Agents
 
-本仓库采用 Agent Skills 目录约定：技能目录的根部必须直接包含 `SKILL.md`。安装到对应的 skills 目录后，Agent 会在新会话启动时扫描技能描述，并根据用户任务自动匹配；如果没有自动触发，可在提示中明确说“使用科研数据可视化技能”。
+This repository follows the Agent Skills directory convention: `SKILL.md` must be directly at the root of the installed skill directory. After installation, start a new Agent session so it can rescan the skills directory. Skill matching uses the `name` and `description` in `SKILL.md`; if automatic matching does not trigger, explicitly ask the Agent to use the scientific data visualization skill.
 
-### Codex
+### Codex on Windows
 
-Windows 用户可以把仓库复制到用户级 Codex skills 目录：
+Clone the repository and copy it to the user-level Codex skills directory:
 
 ```powershell
 git clone https://github.com/Nitrene123/scientific-data-visualization.git
@@ -41,11 +41,11 @@ New-Item -ItemType Directory -Force -Path $codexSkill | Out-Null
 Copy-Item -Path (Join-Path $repo "*") -Destination $codexSkill -Recurse -Force
 ```
 
-关闭并重新打开 Codex 会话即可让它重新扫描 `SKILL.md`。若使用项目级 skills 目录，把同一仓库放到项目的 `.codex/skills/scientific-data-visualization/`，并确保 `SKILL.md` 位于该目录根部。
+Restart the Codex session so it rescans `SKILL.md`. For project-scoped installation, use `<project>/.codex/skills/scientific-data-visualization/` instead.
 
-### Claude Code
+### Claude Code on Windows
 
-把仓库复制到 Claude Code 的项目级 `.claude/skills/` 或用户级 `.claude/skills/`：
+Copy the repository to Claude Code's project-level `.claude/skills/` or user-level `.claude/skills/` directory:
 
 ```powershell
 $claudeSkill = Join-Path $env:USERPROFILE ".claude\skills\scientific-data-visualization"
@@ -53,11 +53,11 @@ New-Item -ItemType Directory -Force -Path $claudeSkill | Out-Null
 Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
 ```
 
-如果 Claude Code 使用独立项目根目录，将 `$claudeSkill` 改为 `<项目根目录>\.claude\skills\scientific-data-visualization`。例如本机独立安装可使用 `D:\claude-code-cn-plus\.claude\skills\scientific-data-visualization`。重新启动 Claude Code 会话后即可自动发现。
+For a standalone Claude Code project, set `$claudeSkill` to `<project>\.claude\skills\scientific-data-visualization`. For example, the standalone installation used on this machine is `D:\claude-code-cn-plus\.claude\skills\scientific-data-visualization`. Restart Claude Code after installation.
 
-### 其他兼容 Agent
+### Other compatible Agents
 
-将整个仓库目录放入该 Agent 配置的 skills 目录，并保持以下结构：
+Copy the repository into the Agent's configured skills directory and preserve this layout:
 
 ~~~text
 <skills-root>/scientific-data-visualization/
@@ -67,33 +67,33 @@ Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
 └── assets/
 ~~~
 
-Agent Skills 兼容实现通常读取 `SKILL.md` 的 `name` 和 `description` 作为匹配信息。若某个 Agent 只支持显式加载，请在其配置中添加此目录，或在对话中直接引用该技能名称。
+Agent Skills-compatible implementations typically read `name` and `description` from `SKILL.md` for matching. If an Agent only supports explicit loading, add this directory in its configuration or reference the skill by name in the conversation.
 
-### 自动加载检查
+### Automatic-loading checklist
 
-- 检查 `SKILL.md` 是否位于技能目录第一层，而不是嵌套在额外的仓库目录中。
-- 新开会话或重启 Agent，使它重新扫描 skills 目录。
-- 用“请使用科研数据可视化技能生成一个 3D 柱阵热力投影图”进行冒烟测试。
-- 用 `python scripts/render_template.py --list` 检查 50 个模板是否可见。
+- Check that `SKILL.md` is directly inside the skill directory, not nested under an extra repository directory.
+- Start a new session or restart the Agent so it rescans the skills directory.
+- Smoke-test with: “Use the scientific data visualization skill to create a 3D bar matrix with a heatmap projection.”
+- Run `python scripts/render_template.py --list` to confirm that all 50 templates are visible.
 
-## 模板分类
+## Template categories
 
-| 类别 | 代表模板 |
+| Category | Representative templates |
 | --- | --- |
-| 比较与分布 | `grouped-comparison`、`paired-raincloud`、`ridge-plot`、`forest-plot` |
-| 关系与相关 | `hexbin-fit`、`correlation-pairgrid`、`bland-altman`、`ma-plot` |
-| 组学与降维 | `expression-heatmap`、`volcano-plot`、`manhattan-plot`、`gsea-curve`、`umap-clusters`、`ordination-pcoa` |
-| 分类与模型评估 | `confusion-matrix`、`cv-roc-ci`、`precision-recall-curve`、`calibration-reliability`、`det-curve`、`learning-curve` |
-| 组成、流与层级 | `sankey-flow`、`nature-chord-diagram`、`treemap-hierarchy`、`sunburst-hierarchy`、`upset-plot`、`waterfall-contribution` |
-| 时间、空间与网络 | `time-series-ribbon`、`event-timeline`、`survival-km`、`spatial-map`、`network-graph`、`ohlc-candlestick` |
-| 三维与多变量 | `3d-bar-heatmap`、`3d-bar-heat-projection`、`3d-response-surface`、`3d-scatter`、`3d-volume`、`3d-vector-field`、`parallel-coordinates`、`radar-profile`、`ternary-composition` |
-| 诊断与综合 | `residual-diagnostics`、`taylor-diagram`、`multiclass-shap-combo`、`prediction-marginal-grid`、`rf-tpe-surface`、`urban-park-cooling-combo`、`grouped-circular-heatmap`、`grouped-corr-split-violin` |
+| Comparison and distribution | `grouped-comparison`, `paired-raincloud`, `ridge-plot`, `forest-plot` |
+| Relationships and correlation | `hexbin-fit`, `correlation-pairgrid`, `bland-altman`, `ma-plot` |
+| Omics and dimensionality reduction | `expression-heatmap`, `volcano-plot`, `manhattan-plot`, `gsea-curve`, `umap-clusters`, `ordination-pcoa` |
+| Classification and model evaluation | `confusion-matrix`, `cv-roc-ci`, `precision-recall-curve`, `calibration-reliability`, `det-curve`, `learning-curve` |
+| Composition, flow, and hierarchy | `sankey-flow`, `nature-chord-diagram`, `treemap-hierarchy`, `sunburst-hierarchy`, `upset-plot`, `waterfall-contribution` |
+| Time, spatial, and network data | `time-series-ribbon`, `event-timeline`, `survival-km`, `spatial-map`, `network-graph`, `ohlc-candlestick` |
+| 3D and multivariate data | `3d-bar-heatmap`, `3d-bar-heat-projection`, `3d-response-surface`, `3d-scatter`, `3d-volume`, `3d-vector-field`, `parallel-coordinates`, `radar-profile`, `ternary-composition` |
+| Diagnostics and composite figures | `residual-diagnostics`, `taylor-diagram`, `multiclass-shap-combo`, `prediction-marginal-grid`, `rf-tpe-surface`, `urban-park-cooling-combo`, `grouped-circular-heatmap`, `grouped-corr-split-violin` |
 
-完整模板 ID、适用问题、数据要求和选图边界见 `references/figure-catalog.md` 与 `references/visualization-catalog.md`。
+See `references/figure-catalog.md` and `references/visualization-catalog.md` for all template IDs, use cases, data requirements, and selection boundaries.
 
-## 模板预览
+## Template preview gallery
 
-以下缩略图直接对应 `assets/previews/` 中的 50 个模板预览文件；点击图片可查看原图。
+The thumbnails below correspond directly to the 50 preview files in `assets/previews/`; click an image to open the original file.
 
 <table>
 <tr>
@@ -168,30 +168,30 @@ Agent Skills 兼容实现通常读取 `SKILL.md` 的 `name` 和 `description` �
 </tr>
 </table>
 
-## 输出格式
+## Output formats
 
-| 格式 | 适用场景 | 说明 |
+| Format | Use case | Description |
 | --- | --- | --- |
-| PNG | 快速预览、汇报和文档 | 高清位图输出 |
-| PDF | 论文排版和打印 | 矢量输出 |
-| SVG | 后期编辑和网页 | 矢量输出 |
+| PNG | Quick previews, presentations, and documents | High-resolution raster output |
+| PDF | Manuscript layout and printing | Vector output |
+| SVG | Post-editing and web use | Vector output |
 
-## 处理流程
+## Workflow
 
-1. 明确研究问题、观测单位、变量类型、分组/配对关系和不确定性含义。
-2. 依据 `references/visualization-catalog.md` 选择最小且可解释的视觉语法。
-3. 使用内置模板或复制最近模板后进行定制，保持标签、分组顺序、尺度和配色一致。
-4. 同时导出 PNG/PDF/SVG，并检查文字、图例、坐标轴、色条、异常值和重叠情况。
-5. 记录真实数据来源；模拟模板只能作为示例，不能当作实证结果。
+1. Define the scientific question, observational unit, variable types, grouping/pairing structure, and uncertainty meaning.
+2. Use `references/visualization-catalog.md` to choose the smallest interpretable visual grammar.
+3. Use a bundled template or copy the nearest template for customization, keeping labels, group order, scales, and colors consistent.
+4. Export PNG/PDF/SVG and check text, legends, axes, colorbars, outliers, and overlap.
+5. Record the real data provenance; simulated templates are examples and must not be presented as empirical results.
 
-## 使用限制
+## Limitations
 
-- 3D 图仅用于确有空间、时间、响应面或场数据含义的第三维；普通二维数据优先使用二维图。
-- 连续色板应对应有序数值，发散色板应对应有意义的中心点；避免彩虹色和仅靠红绿区分。
-- 模板内置数据是确定性模拟数据，不代表任何真实研究或用户数据。
-- 对用户真实数据作图时，应在交付中说明数据来源、变换、缺失值处理和统计检验。
+- Use 3D charts only when the third dimension represents meaningful spatial, temporal, response-surface, or field data; prefer 2D charts for ordinary 2D data.
+- Use sequential palettes for ordered values and diverging palettes around a meaningful midpoint; avoid rainbow scales and red–green-only distinctions.
+- Bundled data is deterministic simulated data and does not represent any real study or user data.
+- When plotting real data, document data provenance, transformations, missing-value handling, and statistical tests in the handoff.
 
-## 仓库结构
+## Repository structure
 
 ~~~text
 scientific-data-visualization/
@@ -210,10 +210,10 @@ scientific-data-visualization/
     └── previews/
 ~~~
 
-## 配色
+## Palette
 
-`scripts/palette.py` 保留原项目色板作为默认主题。无序分类优先使用 `QUALITATIVE`，有序数值优先使用 `viridis` 或 `magma`，以有意义中点为基准的数据使用 `RdBu_r`。需要恢复历史图形风格时，不要在模板中另行定义一套互相冲突的颜色。
+`scripts/palette.py` keeps the original project palette as the default theme. Use `QUALITATIVE` for unordered groups, `viridis` or `magma` for ordered values, and `RdBu_r` for data centered on a meaningful midpoint. Do not define a conflicting color system inside individual templates.
 
-## 内容责任
+## Content responsibility
 
-本仓库提供可复现的科研制图模板和方法建议。示例数据仅用于演示；使用者应自行核对真实数据、统计假设、单位、图注和目标期刊规范。
+This repository provides reproducible scientific figure templates and methodological guidance. Example data is for demonstration only; users are responsible for checking real data, statistical assumptions, units, captions, and target-journal requirements.

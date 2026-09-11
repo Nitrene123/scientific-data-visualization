@@ -1,6 +1,6 @@
 # 科研資料視覺化
 
-[簡體中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+[簡體中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 面向 Codex、Claude 與其他 Agent 的可重現科研資料視覺化技能，提供 50 個可直接執行的 Matplotlib 模板、選圖規則、原始相容色板與 PNG/PDF/SVG 匯出流程。
 

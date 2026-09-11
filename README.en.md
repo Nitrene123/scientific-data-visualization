@@ -1,6 +1,6 @@
 # Scientific Data Visualization
 
-[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+[简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 A reproducible Agent Skill for scientific data visualization with 50 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
 
