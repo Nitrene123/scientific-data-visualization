@@ -1,6 +1,6 @@
 ---
 name: scientific-data-visualization
-description: "Use this skill for data-driven scientific visualizations: selecting or reviewing an appropriate chart type, reproducing built-in scientific figure templates, or creating custom research plots. Especially applies to 科研绘图模板, 3D柱阵/响应面/散点/体数据/向量场, 混淆矩阵, Bland–Altman一致性图, MA图, 富集点图, Treemap/Sunburst, 瀑布图, 时间序列置信带, 事件时间线, OHLC/K线, DET与学习曲线, GSEA曲线, SHAP蜂群柱状图, 配对云雨图, 交叉验证ROC, PR与校准曲线, 生存曲线, 残差诊断, 曼哈顿图, 泰勒图, 相关矩阵组合图, 预测真实值边缘分布图, TPE调参3D曲面, 下三角相关矩阵半边小提琴图, 分组环形热图, 城市公园降温组合图, Nature和弦图, 热图, 火山图, 降维图, or 数据可视化选图. It does not cover editable conceptual diagrams, which belong to separate conceptual-diagram skills."
+description: "Use this skill for data-driven scientific visualizations: selecting or reviewing an appropriate chart type, reproducing built-in scientific figure templates, or creating custom research plots. Especially applies to 科研绘图模板, 3D柱阵/响应面/散点/体数据/向量场, 混淆矩阵, Bland–Altman一致性图, MA图, 富集点图, Treemap/Sunburst, 瀑布图, 时间序列置信带, 事件时间线, OHLC/K线, DET与学习曲线, GSEA曲线, SHAP蜂群柱状图, 配对云雨图, 交叉验证ROC, PR与校准曲线, 生存曲线, 残差诊断, 曼哈顿图, 泰勒图, 相关矩阵组合图, 预测真实值边缘分布图, TPE调参3D曲面, 下三角相关矩阵半边小提琴图, 分组环形热图, 城市公园降温组合图, Nature和弦图, 热图, 火山图, 降维图, or 数据可视化选图. It does not cover editable conceptual diagrams, which belong to scibox-diagram."
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob
 ---
 
@@ -20,7 +20,7 @@ When the requested chart is not a named template, first establish the visual con
 - Use volcano plots only for effect size against a stated p or adjusted-p value, with threshold and label-selection rules.
 - Use Sankey, chord, circos, maps, ternary, or UpSet plots only when their underlying flow, relationship, spatial, compositional, or set-intersection structure is real. Do not choose them merely for ornament.
 - Use 3D only when the third coordinate carries a real spatial, temporal, or response meaning. For a discrete x/y matrix with magnitude z, use a 3D bar matrix only when height adds interpretation; otherwise prefer a 2D heatmap. For a dense discrete matrix, `3d-bar-heat-projection` adds a floor heatmap/contour projection to localize peaks without relying on perspective alone. For two continuous inputs and a response, use a response surface with contours or a ground projection to preserve readability. Add a path overlay only when it represents a real trajectory or optimization path, not a decorative stroke.
-- Use the shared legacy-compatible palette in `scripts/palette.py`: `QUALITATIVE` for unordered groups, `viridis`/`magma` for ordered numeric values, and `RdBu_r` for values centered on a meaningful midpoint. Avoid rainbow scales and red–green pairs; use shape, line type, or direct labels when color alone is insufficient.
+- Use the shared legacy-compatible palette in `scripts/palette.py`: `QUALITATIVE` for unordered groups, `THREED` for the continuous response values in `3d-bar-heatmap` and `3d-bar-heat-projection`, `viridis`/`magma` for other ordered numeric values, and `RdBu_r` for values centered on a meaningful midpoint. `THREED` runs from pale mint/teal through yellow to warm orange/red to match the reference palette for these two bar-matrix figures. Avoid rainbow scales and red–green pairs; use shape, line type, or direct labels when color alone is insufficient.
 - Use a precision–recall curve when the positive class is imbalanced or the operating point emphasizes retrieval; use a calibration/reliability diagram to judge probability agreement, not discrimination. Use Kaplan–Meier for time-to-event data with censoring and include censor marks and an at-risk table where space permits.
 - Use residual diagnostics to assess model adequacy (residuals vs fitted, Q–Q, scale–location, and influence/outlier screening). Use a Manhattan plot for genome-wide indexed association tests, with an explicit p-value scale and threshold.
 - Use a confusion matrix for class-wise error structure, Bland–Altman for agreement between two measurement methods, and an MA plot for mean-abundance versus fold-change structure. Use enrichment dot plots when pathway identity, gene ratio, count, and adjusted significance must be shown together.
@@ -67,7 +67,7 @@ python3 <skill-dir>/scripts/render_template.py --list
 When this figure is created for `academic-pipeline`, return the normal output
 paths together with a **Visual Asset Handoff** suitable for the paper's asset
 ledger or Material Passport attachment. Include: figure purpose and proposed
-caption, `source_skill: scientific-data-visualization`, the copied script path, PNG/PDF/SVG
+caption, `source_skill: scibox-figure`, the copied script path, PNG/PDF/SVG
 paths, the exact data provenance (`simulated` or the supplied data/result path),
 and validation performed. A simulated template remains illustrative and must not
 be presented as an empirical result. ARS should only cite the exported figure

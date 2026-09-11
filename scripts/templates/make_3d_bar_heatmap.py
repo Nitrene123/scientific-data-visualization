@@ -16,6 +16,8 @@ from matplotlib.lines import Line2D
 from matplotlib.colors import Normalize
 import numpy as np
 
+from palette import THREED
+
 
 def configure_matplotlib() -> None:
     mpl.rcParams.update(
@@ -61,7 +63,7 @@ def main() -> None:
     ax = fig.add_axes([0.07, 0.08, 0.78, 0.82], projection="3d")
     dx = float(hours[1] - hours[0])
     dy = float(days[1] - days[0])
-    colors = plt.cm.viridis(norm(heights.ravel()))
+    colors = THREED(norm(heights.ravel()))
     ax.bar3d(
         (xx.ravel() - dx * 0.43),
         (yy.ravel() - dy * 0.40),
@@ -100,7 +102,7 @@ def main() -> None:
     ax.zaxis.pane.set_facecolor((0.97, 0.97, 0.97, 0.30))
     ax.grid(True, color="#b7c2c2", alpha=0.28, linewidth=0.55)
 
-    sm = ScalarMappable(norm=norm, cmap="viridis")
+    sm = ScalarMappable(norm=norm, cmap=THREED)
     sm.set_array(heights)
     cbar = fig.colorbar(sm, ax=ax, fraction=0.035, pad=0.10, shrink=0.73)
     cbar.set_label("Bar height / response (kWh)", labelpad=8)

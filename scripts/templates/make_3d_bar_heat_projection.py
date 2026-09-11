@@ -16,7 +16,7 @@ from matplotlib.colors import Normalize
 from matplotlib.lines import Line2D
 import numpy as np
 
-from palette import GRID, HIGHLIGHT, INK, SEQUENTIAL
+from palette import GRID, HIGHLIGHT, INK, THREED
 
 
 def response_matrix(hours: np.ndarray, days: np.ndarray) -> np.ndarray:
@@ -55,7 +55,7 @@ def main() -> None:
     xx, yy = np.meshgrid(hours, days)
     values = response_matrix(hours, days)
     norm = Normalize(vmin=float(values.min()), vmax=float(values.max()))
-    cmap = plt.get_cmap(SEQUENTIAL)
+    cmap = THREED
     colors = cmap(norm(values.ravel()))
     peak_mask = values.ravel() >= np.quantile(values, 0.985)
     colors[peak_mask] = mpl.colors.to_rgba(HIGHLIGHT)

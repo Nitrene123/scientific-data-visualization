@@ -212,7 +212,7 @@ scientific-data-visualization/
 
 ## Palette
 
-`scripts/palette.py` keeps the original project palette as the default theme. Use `QUALITATIVE` for unordered groups, `viridis` or `magma` for ordered values, and `RdBu_r` for data centered on a meaningful midpoint. Do not define a conflicting color system inside individual templates.
+`scripts/palette.py` keeps the original project palette as the default theme. Use `QUALITATIVE` for unordered groups, `viridis` or `magma` for ordered values, and `RdBu_r` for data centered on a meaningful midpoint. The two bar-matrix templates, `3d-bar-heatmap` and `3d-bar-heat-projection`, use the dedicated `THREED` scale from pale mint/teal through yellow to warm orange/red. Do not define a conflicting color system inside individual templates.
 
 ## Content responsibility
 
