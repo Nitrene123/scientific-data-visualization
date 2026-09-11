@@ -1,5 +1,7 @@
 # 科研数据可视化
 
+[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+
 面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 50 个可直接运行的 Matplotlib 模板、选图规则、原始兼容色板和 PNG/PDF/SVG 导出流程。
 
 ## 主要功能
@@ -22,6 +24,57 @@
    ```
 
 4. 渲染结果默认写入当前工作区的 `绘图复刻/outputs/`，模板脚本复制到 `绘图复刻/scripts/`。
+
+## 自动加载到 Codex、Claude 和其他 Agent
+
+本仓库采用 Agent Skills 目录约定：技能目录的根部必须直接包含 `SKILL.md`。安装到对应的 skills 目录后，Agent 会在新会话启动时扫描技能描述，并根据用户任务自动匹配；如果没有自动触发，可在提示中明确说“使用科研数据可视化技能”。
+
+### Codex
+
+Windows 用户可以把仓库复制到用户级 Codex skills 目录：
+
+```powershell
+git clone https://github.com/Nitrene123/scientific-data-visualization.git
+$repo = Join-Path (Get-Location) "scientific-data-visualization"
+$codexSkill = Join-Path $env:USERPROFILE ".codex\skills\scientific-data-visualization"
+New-Item -ItemType Directory -Force -Path $codexSkill | Out-Null
+Copy-Item -Path (Join-Path $repo "*") -Destination $codexSkill -Recurse -Force
+```
+
+关闭并重新打开 Codex 会话即可让它重新扫描 `SKILL.md`。若使用项目级 skills 目录，把同一仓库放到项目的 `.codex/skills/scientific-data-visualization/`，并确保 `SKILL.md` 位于该目录根部。
+
+### Claude Code
+
+把仓库复制到 Claude Code 的项目级 `.claude/skills/` 或用户级 `.claude/skills/`：
+
+```powershell
+$claudeSkill = Join-Path $env:USERPROFILE ".claude\skills\scientific-data-visualization"
+New-Item -ItemType Directory -Force -Path $claudeSkill | Out-Null
+Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
+```
+
+如果 Claude Code 使用独立项目根目录，将 `$claudeSkill` 改为 `<项目根目录>\.claude\skills\scientific-data-visualization`。例如本机独立安装可使用 `D:\claude-code-cn-plus\.claude\skills\scientific-data-visualization`。重新启动 Claude Code 会话后即可自动发现。
+
+### 其他兼容 Agent
+
+将整个仓库目录放入该 Agent 配置的 skills 目录，并保持以下结构：
+
+~~~text
+<skills-root>/scientific-data-visualization/
+├── SKILL.md
+├── scripts/
+├── references/
+└── assets/
+~~~
+
+Agent Skills 兼容实现通常读取 `SKILL.md` 的 `name` 和 `description` 作为匹配信息。若某个 Agent 只支持显式加载，请在其配置中添加此目录，或在对话中直接引用该技能名称。
+
+### 自动加载检查
+
+- 检查 `SKILL.md` 是否位于技能目录第一层，而不是嵌套在额外的仓库目录中。
+- 新开会话或重启 Agent，使它重新扫描 skills 目录。
+- 用“请使用科研数据可视化技能生成一个 3D 柱阵热力投影图”进行冒烟测试。
+- 用 `python scripts/render_template.py --list` 检查 50 个模板是否可见。
 
 ## 模板分类
 
