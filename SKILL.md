@@ -62,6 +62,7 @@ python3 <skill-dir>/scripts/render_template.py --list
 - Outputs: `绘图复刻/outputs/<template>_replica.png`, `.pdf`, `.svg`.
 - Use the bundled scripts as the first choice; edit the copied workspace script only when the user requests customization.
 - The bundled scripts use deterministic simulated data. Do not claim simulated values reproduce a source study exactly.
+- Standard figure exports should not include explanatory footer annotations; keep those notes off by default and add them only when the user explicitly requests a slide/PPT presentation.
 
 ## ARS pipeline handoff
 

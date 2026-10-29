@@ -39,7 +39,7 @@ def save(fig: plt.Figure) -> None:
     plt.close(fig)
 
 
-def main() -> None:
+def main(show_annotation: bool = False) -> None:
     mpl.rcParams.update(
         {
             "font.family": "sans-serif",
@@ -118,7 +118,15 @@ def main() -> None:
         framealpha=0.9,
         fontsize=8.2,
     )
-    fig.text(0.5, 0.018, "Bar height and floor colors encode the same response matrix; the floor projection supports peak localization.", ha="center", color=INK, fontsize=8.7)
+    if show_annotation:
+        fig.text(
+            0.5,
+            0.018,
+            "Bar height and floor colors encode the same response matrix; the floor projection supports peak localization.",
+            ha="center",
+            color=INK,
+            fontsize=8.7,
+        )
     fig.subplots_adjust(left=0.02, right=0.96, top=0.90, bottom=0.08)
     save(fig)
 
