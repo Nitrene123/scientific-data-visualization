@@ -154,7 +154,8 @@ def draw_method(ax: plt.Axes, observation: dict[str, object], panel_index: int) 
     )
 
 
-def make_figure(output_stem: Path) -> None:
+def make_figure(output_stem: Path, show_annotation: bool = False) -> None:
+    """Render the figure; keep the explanatory note off unless preparing slides."""
     configure_matplotlib()
     panels = synthetic_benchmark_data()
     fig, axes = plt.subplots(
@@ -206,14 +207,15 @@ def make_figure(output_stem: Path) -> None:
         color=INK,
         y=0.965,
     )
-    fig.text(
-        0.5,
-        0.035,
-        "faint points = replicates · connected markers = ordered observations · bars = 95% CI",
-        ha="center",
-        fontsize=8.5,
-        color=MUTED,
-    )
+    if show_annotation:
+        fig.text(
+            0.5,
+            0.035,
+            "faint points = replicates · connected markers = ordered observations · bars = 95% CI",
+            ha="center",
+            fontsize=8.5,
+            color=MUTED,
+        )
 
     handles = [
         plt.Line2D(
