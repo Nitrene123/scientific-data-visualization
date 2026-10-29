@@ -2,14 +2,14 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 50 个可直接运行的 Matplotlib 模板、选图规则、原始兼容色板以及 PNG/PDF/SVG 导出流程。
+面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 51 个可直接运行的 Matplotlib 模板、选图规则、原始兼容色板以及 PNG/PDF/SVG 导出流程。
 
 ## 主要功能
 
 - 覆盖比较、分布、相关、降维、模型评估、生存分析、组学、时间序列、空间/网络和三维数据。
 - 内置 3D 柱阵、热力投影、响应面、3D 散点、体数据和向量场模板。
 - 默认保留原项目色板，并提供 `viridis`、`magma`、`RdBu_r` 连续色图。
-- 提供 50 张预览图、50 个模板脚本以及 PNG、PDF、SVG 输出。
+- 提供 51 张预览图、51 个模板脚本以及 PNG、PDF、SVG 输出。
 
 ## 使用方式
 
@@ -46,11 +46,11 @@ Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
 
 - 确认 `SKILL.md` 位于技能目录第一层。
 - 新开会话或重启 Agent。
-- 运行 `python scripts/render_template.py --list` 确认 50 个模板可见。
+- 运行 `python scripts/render_template.py --list` 确认 51 个模板可见。
 
 ## 模板预览
 
-英文主 README 包含 50 张模板缩略图画廊；完整原图位于 [assets/previews](assets/previews)。
+英文主 README 包含 51 张模板缩略图画廊；完整原图位于 [assets/previews](assets/previews)。
 
 ## 限制
 

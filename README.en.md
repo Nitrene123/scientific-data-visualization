@@ -2,14 +2,15 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-A reproducible Agent Skill for scientific data visualization with 50 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
+A reproducible Agent Skill for scientific data visualization with 51 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
 
 ## Features
 
 - Covers comparison, distribution, correlation, dimensionality reduction, model evaluation, survival analysis, omics, time series, spatial/network data, and 3D data.
 - Includes 3D bar matrices, heatmap projections, response surfaces, 3D scatter, volume, and vector-field templates.
 - Keeps the original project palette by default and provides `viridis`, `magma`, and `RdBu_r` for continuous values.
-- Includes 50 preview images and reproducible scripts that export PNG, PDF, and SVG.
+- Includes 51 preview images and reproducible scripts that export PNG, PDF, and SVG.
+- Includes faceted benchmark strips with raw replicate points, connected markers, uncertainty intervals, and optional log-scaled x-axes.
 
 ## Usage
 
@@ -60,7 +61,7 @@ Copy the repository into the Agent's configured skills directory and preserve th
 
 ## Preview gallery
 
-The README contains the 50-image gallery. Original preview files are also available in [assets/previews](assets/previews).
+The README contains the 51-image gallery. Original preview files are also available in [assets/previews](assets/previews).
 
 ## Limitations
 

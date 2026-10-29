@@ -18,6 +18,7 @@ When the requested chart is not a named template, first establish the visual con
 - Use heatmaps and correlations only after stating scaling, correlation method, clustering/distance, and ordering.
 - For PCA/PCoA/NMDS/UMAP, report preprocessing, method and distance/neighbour settings; embeddings are not evidence of significance by themselves.
 - Use volcano plots only for effect size against a stated p or adjusted-p value, with threshold and label-selection rules.
+- Use a faceted error-bar strip when several benchmark panels compare methods through raw replicate points, connected ordered observations, summary markers, and uncertainty intervals; allow panel-specific linear or logarithmic x-scales when proposal time spans different orders of magnitude.
 - Use Sankey, chord, circos, maps, ternary, or UpSet plots only when their underlying flow, relationship, spatial, compositional, or set-intersection structure is real. Do not choose them merely for ornament.
 - Use 3D only when the third coordinate carries a real spatial, temporal, or response meaning. For a discrete x/y matrix with magnitude z, use a 3D bar matrix only when height adds interpretation; otherwise prefer a 2D heatmap. For a dense discrete matrix, `3d-bar-heat-projection` adds a floor heatmap/contour projection to localize peaks without relying on perspective alone. For two continuous inputs and a response, use a response surface with contours or a ground projection to preserve readability. Add a path overlay only when it represents a real trajectory or optimization path, not a decorative stroke.
 - Use the shared legacy-compatible palette in `scripts/palette.py`: `QUALITATIVE` for unordered groups, `THREED` for the continuous response values in `3d-bar-heatmap` and `3d-bar-heat-projection`, `viridis`/`magma` for other ordered numeric values, and `RdBu_r` for values centered on a meaningful midpoint. `THREED` runs from pale mint/teal through yellow to warm orange/red to match the reference palette for these two bar-matrix figures. Avoid rainbow scales and red–green pairs; use shape, line type, or direct labels when color alone is insufficient.
@@ -87,6 +88,7 @@ after this handoff is available.
 - `urban-park-cooling-combo`
 - `nature-chord-diagram`
 - `grouped-comparison`
+- `faceted-errorbar-strip`
 - `ridge-plot`
 - `hexbin-fit`
 - `expression-heatmap`

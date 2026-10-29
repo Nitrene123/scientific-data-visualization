@@ -2,14 +2,15 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-A reproducible Agent Skill for scientific data visualization with 50 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
+A reproducible Agent Skill for scientific data visualization with 51 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
 
 ## Features
 
 - Covers comparison, distribution, correlation, dimensionality reduction, model evaluation, survival analysis, omics, time series, spatial/network data, and 3D data.
 - Includes 3D bar matrices, heatmap projections, response surfaces, 3D scatter, volume, and vector-field templates; use 3D only when the third dimension has a real scientific meaning.
 - Keeps the original project palette by default and provides `viridis`, `magma`, and `RdBu_r` for continuous values.
-- Includes deterministic example data, 50 preview images, and reproducible scripts that export PNG, PDF, and SVG.
+- Includes deterministic example data, 51 preview images, and reproducible scripts that export PNG, PDF, and SVG.
+- Includes faceted benchmark strips with raw replicate points, connected markers, uncertainty intervals, and optional log-scaled x-axes.
 - Provides chart-selection boundaries and scientific figure quality-control guidance.
 
 ## Usage
@@ -74,13 +75,13 @@ Agent Skills-compatible implementations typically read `name` and `description` 
 - Check that `SKILL.md` is directly inside the skill directory, not nested under an extra repository directory.
 - Start a new session or restart the Agent so it rescans the skills directory.
 - Smoke-test with: “Use the scientific data visualization skill to create a 3D bar matrix with a heatmap projection.”
-- Run `python scripts/render_template.py --list` to confirm that all 50 templates are visible.
+- Run `python scripts/render_template.py --list` to confirm that all 51 templates are visible.
 
 ## Template categories
 
 | Category | Representative templates |
 | --- | --- |
-| Comparison and distribution | `grouped-comparison`, `paired-raincloud`, `ridge-plot`, `forest-plot` |
+| Comparison and distribution | `grouped-comparison`, `faceted-errorbar-strip`, `paired-raincloud`, `ridge-plot`, `forest-plot` |
 | Relationships and correlation | `hexbin-fit`, `correlation-pairgrid`, `bland-altman`, `ma-plot` |
 | Omics and dimensionality reduction | `expression-heatmap`, `volcano-plot`, `manhattan-plot`, `gsea-curve`, `umap-clusters`, `ordination-pcoa` |
 | Classification and model evaluation | `confusion-matrix`, `cv-roc-ci`, `precision-recall-curve`, `calibration-reliability`, `det-curve`, `learning-curve` |
@@ -93,7 +94,7 @@ See `references/figure-catalog.md` and `references/visualization-catalog.md` for
 
 ## Template preview gallery
 
-The thumbnails below correspond directly to the 50 preview files in `assets/previews/`; click an image to open the original file.
+The thumbnails below correspond directly to the 51 preview files in `assets/previews/`; click an image to open the original file.
 
 <table>
 <tr>
@@ -165,6 +166,9 @@ The thumbnails below correspond directly to the 50 preview files in `assets/prev
 <td><a href="assets/previews/urban_park_cooling_combo_replica.png"><img src="assets/previews/urban_park_cooling_combo_replica.png" alt="urban-park-cooling-combo" width="180"></a><br><sub><code>urban-park-cooling-combo</code></sub></td>
 <td><a href="assets/previews/volcano_plot_replica.png"><img src="assets/previews/volcano_plot_replica.png" alt="volcano-plot" width="180"></a><br><sub><code>volcano-plot</code></sub></td>
 <td><a href="assets/previews/waterfall_contribution_replica.png"><img src="assets/previews/waterfall_contribution_replica.png" alt="waterfall-contribution" width="180"></a><br><sub><code>waterfall-contribution</code></sub></td>
+</tr>
+<tr>
+<td><a href="assets/previews/faceted_errorbar_strip_replica.png"><img src="assets/previews/faceted_errorbar_strip_replica.png" alt="faceted-errorbar-strip" width="180"></a><br><sub><code>faceted-errorbar-strip</code></sub></td>
 </tr>
 </table>
 

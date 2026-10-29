@@ -16,6 +16,7 @@ Each id maps to a bundled script under `scripts/templates/`.
 | `urban-park-cooling-combo` | `make_urban_park_cooling_combo.py` | 堆叠图 + 云雨图 + 箱线图组合图 |
 | `nature-chord-diagram` | `make_nature_chord_diagram.py` | Nature 风格和弦图 |
 | `grouped-comparison` | `make_grouped_comparison.py` | 分组比较、原始点、均值与 95% CI |
+| `faceted-errorbar-strip` | `make_faceted_errorbar_strip.py` | 多面板原始点、连接点线、误差棒与可选对数横轴基准图 |
 | `ridge-plot` | `make_ridge_plot.py` | 多组山脊密度图 |
 | `hexbin-fit` | `make_hexbin_fit.py` | 大样本 hexbin 密度与拟合趋势 |
 | `expression-heatmap` | `make_expression_heatmap.py` | 表达矩阵/特征强度热图 |
@@ -76,6 +77,7 @@ Prompts from the MathModel Improve tab should include `$mathmodel-figure-templat
 | `nature-chord-diagram` | `assets/previews/nature_chord_diagram_replica.png` |
 | `multiclass-shap-combo` | `assets/previews/multiclass_shap_combo_replica.png` |
 | `grouped-comparison` | `assets/previews/grouped_comparison_replica.png` |
+| `faceted-errorbar-strip` | `assets/previews/faceted_errorbar_strip_replica.png` |
 | `ridge-plot` | `assets/previews/ridge_plot_replica.png` |
 | `hexbin-fit` | `assets/previews/hexbin_fit_replica.png` |
 | `expression-heatmap` | `assets/previews/expression_heatmap_replica.png` |

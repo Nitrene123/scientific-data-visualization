@@ -2,14 +2,14 @@
 
 [簡體中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-面向 Codex、Claude 與其他 Agent 的可重現科研資料視覺化技能，提供 50 個可直接執行的 Matplotlib 模板、選圖規則、原始相容色板與 PNG/PDF/SVG 匯出流程。
+面向 Codex、Claude 與其他 Agent 的可重現科研資料視覺化技能，提供 51 個可直接執行的 Matplotlib 模板、選圖規則、原始相容色板與 PNG/PDF/SVG 匯出流程。
 
 ## 主要功能
 
 - 覆蓋比較、分布、相關、降維、分類評估、生存分析、組學、時間序列、空間/網路與三維資料等常見科研圖形。
 - 內建 3D 柱陣、熱力投影、響應面、散點、體資料與向量場模板。
 - 預設保留原專案相容色板，並提供 `viridis`、`magma`、`RdBu_r` 等連續色圖。
-- 50 個模板均提供預覽圖，並輸出 PNG、PDF、SVG。
+- 51 個模板均提供預覽圖，並輸出 PNG、PDF、SVG。
 
 ## 使用方式
 

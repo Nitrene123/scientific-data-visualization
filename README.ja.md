@@ -2,14 +2,14 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-Codex、Claude などの Agent 向けの再現可能な科学データ可視化スキルです。50 個の実行可能な Matplotlib テンプレート、グラフ選択ルール、元の互換カラーパレット、PNG/PDF/SVG 出力を含みます。
+Codex、Claude などの Agent 向けの再現可能な科学データ可視化スキルです。51 個の実行可能な Matplotlib テンプレート、グラフ選択ルール、元の互換カラーパレット、PNG/PDF/SVG 出力を含みます。
 
 ## 主な機能
 
 - 比較、分布、相関、次元削減、モデル評価、生存解析、オミクス、時系列、空間/ネットワーク、3D データに対応。
 - 3D 柱行列、ヒートマップ投影、応答曲面、3D 散布図、ボリューム、ベクトル場を収録。
 - 元のプロジェクト色をデフォルトとして保持し、連続値には `viridis`、`magma`、`RdBu_r` を利用可能。
-- 50 枚のプレビュー画像と PNG、PDF、SVG の出力に対応。
+- 51 枚のプレビュー画像と PNG、PDF、SVG の出力に対応。
 
 ## 使い方
 
@@ -46,7 +46,7 @@ Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
 
 ## プレビュー
 
-50 枚の画像は [assets/previews](assets/previews) にあり、README のプレビューギャラリーからも確認できます。
+51 枚の画像は [assets/previews](assets/previews) にあり、README のプレビューギャラリーからも確認できます。
 
 ## 制限
 

@@ -12,7 +12,7 @@
 
 ## 随 skill 分发的版式参考（`assets/previews/`）
 
-以下 50 张是**实际可运行的模板渲染结果**，比外部图集更可靠——它们与本 skill 的
+以下 51 张是**实际可运行的模板渲染结果**，比外部图集更可靠——它们与本 skill 的
 `scripts/templates/` 一一对应，可直接对照版式并立即复现：
 
 | 预览图 | 对应模板 id |
@@ -29,6 +29,7 @@
 | `nature_chord_diagram_replica.png` | `nature-chord-diagram` Nature 风格和弦图 |
 | `multiclass_shap_combo_replica.png` | `multiclass-shap-combo` 多分类 SHAP 组合图 |
 | `grouped_comparison_replica.png` | `grouped-comparison` 分组比较、原始点与 95% CI |
+| `faceted_errorbar_strip_replica.png` | `faceted-errorbar-strip` 多面板原始点、连接点线、误差棒与可选对数横轴 |
 | `ridge_plot_replica.png` | `ridge-plot` 多组密度山脊图 |
 | `hexbin_fit_replica.png` | `hexbin-fit` 大样本密度与拟合趋势 |
 | `expression_heatmap_replica.png` | `expression-heatmap` 表达矩阵热图 |
