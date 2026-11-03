@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.lines import Line2D
 
@@ -26,6 +27,7 @@ def configure_matplotlib() -> None:
             "axes.linewidth": 0.75,
         }
     )
+    apply_paper_style()
 
 
 def surface_a(x: np.ndarray, y: np.ndarray) -> np.ndarray:

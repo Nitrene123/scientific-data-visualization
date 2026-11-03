@@ -12,6 +12,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.lines import Line2D
 
@@ -54,6 +55,7 @@ def configure_matplotlib() -> None:
             "legend.frameon": False,
         }
     )
+    apply_paper_style()
 
 
 def simulate_feature_data(seed: int = 20260506, n_train: int = 170, n_test: int = 84) -> tuple[np.ndarray, np.ndarray]:

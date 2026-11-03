@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 from matplotlib.lines import Line2D
@@ -50,6 +51,7 @@ def main(show_annotation: bool = False) -> None:
             "axes.linewidth": 0.75,
         }
     )
+    apply_paper_style()
     hours = np.arange(0, 24, 1.0)
     days = np.arange(0, 7, 1.0)
     xx, yy = np.meshgrid(hours, days)

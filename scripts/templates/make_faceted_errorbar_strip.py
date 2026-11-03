@@ -13,18 +13,18 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
-from palette import GOLD, GRID, HIGHLIGHT, INK, MUTED, PRIMARY, PURPLE, SECONDARY, WHITE
+from palette import GRID, INK, MUTED, WHITE, series_style
 
 
 METHODS = [
-    ("Method A", PRIMARY, "o"),
-    ("Method B", GOLD, "s"),
-    ("Method C", SECONDARY, "^"),
-    ("Method D", HIGHLIGHT, "D"),
-    ("Method E", PURPLE, "v"),
+    (name, series_style(index)["color"], series_style(index)["marker"])
+    for index, name in enumerate(["Method A", "Method B", "Method C", "Method D", "Method E"])
 ]
+
+T_CRITICAL_95_DF4 = 2.776  # five replicate runs per method
 
 
 def lighten(color: str, amount: float = 0.62) -> tuple[float, float, float]:
@@ -47,6 +47,7 @@ def configure_matplotlib() -> None:
             "legend.frameon": False,
         }
     )
+    apply_paper_style()
 
 
 def synthetic_benchmark_data(seed: int = 20261030) -> list[dict[str, object]]:
@@ -102,54 +103,44 @@ def synthetic_benchmark_data(seed: int = 20261030) -> list[dict[str, object]]:
                 }
             )
         panel["observations"] = observations
-        panel["reference"] = {
-            "x": panel["xlim"][0] * (1.12 if panel["xscale"] == "linear" else 1.10),
-            "y": 0.015 + panel_index * 0.004,
-        }
     return panels
 
 
-def draw_method(ax: plt.Axes, observation: dict[str, object], panel_index: int) -> None:
+def draw_method(ax: plt.Axes, observation: dict[str, object]) -> None:
     color = str(observation["color"])
     marker = str(observation["marker"])
     x = np.asarray(observation["x"], dtype=float)
     y = np.asarray(observation["y"], dtype=float)
-    order = np.argsort(y)
-
     ax.scatter(
         x,
         y,
-        s=24,
+        s=23,
+        marker=marker,
         color=lighten(color),
-        alpha=0.78,
+        alpha=0.70,
         edgecolors="none",
         zorder=2,
-    )
-    ax.plot(x[order], y[order], color=color, alpha=0.78, linewidth=1.55, zorder=3)
-    ax.scatter(
-        x[order],
-        y[order],
-        s=45,
-        marker=marker,
-        color=color,
-        edgecolors=WHITE,
-        linewidths=0.55,
-        alpha=0.94,
-        zorder=4,
     )
 
     mean_x = float(np.mean(x))
     mean_y = float(np.mean(y))
+    sem_x = float(np.std(x, ddof=1) / np.sqrt(x.size))
     sem_y = float(np.std(y, ddof=1) / np.sqrt(y.size))
     ax.errorbar(
         mean_x,
         mean_y,
-        yerr=1.96 * sem_y,
-        fmt="none",
+        xerr=T_CRITICAL_95_DF4 * sem_x,
+        yerr=T_CRITICAL_95_DF4 * sem_y,
+        fmt=marker,
+        markersize=6.2,
+        markerfacecolor=color,
+        markeredgecolor=WHITE,
+        markeredgewidth=0.65,
+        color=color,
         ecolor=color,
-        elinewidth=1.2,
-        capsize=2.8,
-        capthick=1.2,
+        elinewidth=1.05,
+        capsize=2.4,
+        capthick=0.9,
         zorder=5,
     )
 
@@ -165,24 +156,15 @@ def make_figure(output_stem: Path, show_annotation: bool = False) -> None:
         sharey=True,
         gridspec_kw={"wspace": 0.32},
     )
-    fig.subplots_adjust(left=0.085, right=0.985, bottom=0.19, top=0.72)
+    fig.subplots_adjust(left=0.085, right=0.985, bottom=0.18, top=0.78)
 
     for panel_index, (ax, panel) in enumerate(zip(axes, panels)):
         for observation in panel["observations"]:
-            draw_method(ax, observation, panel_index)
+            draw_method(ax, observation)
 
-        reference = panel["reference"]
-        ax.scatter(
-            [reference["x"]],
-            [reference["y"]],
-            marker="*",
-            s=90,
-            color="#B24C88",
-            edgecolors=WHITE,
-            linewidths=0.7,
-            zorder=6,
-        )
-        ax.set_title(str(panel["title"]), fontsize=11, color=INK, pad=8)
+        ax.set_title(str(panel["title"]), fontsize=9.5, color=INK, pad=7, weight="bold")
+        ax.text(0.0, 1.035, chr(ord("a") + panel_index), transform=ax.transAxes,
+                fontsize=10.5, fontweight="bold", color=INK, va="bottom")
         ax.set_xscale(str(panel["xscale"]))
         ax.set_xlim(*panel["xlim"])
         if panel["xscale"] == "log":
@@ -190,28 +172,28 @@ def make_figure(output_stem: Path, show_annotation: bool = False) -> None:
             ax.set_xticklabels(["3", "10", "30"])
         ax.set_ylim(-0.03, 1.05)
         ax.set_yticks([0.0, 0.5, 1.0])
-        ax.grid(axis="y", color=GRID, linewidth=0.75, alpha=0.62)
-        ax.tick_params(axis="both", labelsize=9, colors=INK)
-        ax.set_xlabel("Proposal time (ms)", fontsize=10, color=INK, labelpad=8)
+        ax.grid(True, color=GRID, linewidth=0.6, alpha=0.62, linestyle="--")
+        ax.tick_params(axis="both", labelsize=8, colors=INK)
+        ax.set_xlabel("Proposal time (ms)", fontsize=9, color=INK, labelpad=6)
         ax.spines["left"].set_color(INK)
         ax.spines["bottom"].set_color(INK)
 
         if panel_index > 0:
             ax.tick_params(axis="y", labelleft=False)
 
-    axes[0].set_ylabel(r"Local regret $\rho$", fontsize=11, color=INK, labelpad=8)
+    axes[0].set_ylabel(r"Local regret $\rho$", fontsize=9, color=INK, labelpad=7)
     fig.suptitle(
         "Faceted benchmark: local regret versus proposal time",
-        fontsize=13,
+        fontsize=11,
         weight="bold",
         color=INK,
-        y=0.965,
+        y=0.975,
     )
     if show_annotation:
         fig.text(
             0.5,
             0.035,
-            "faint points = replicates · connected markers = ordered observations · bars = 95% CI",
+            "faint points = replicate runs · large markers and bars = mean with 95% t intervals",
             ha="center",
             fontsize=8.5,
             color=MUTED,
@@ -219,8 +201,8 @@ def make_figure(output_stem: Path, show_annotation: bool = False) -> None:
 
     handles = [
         plt.Line2D(
-            [0],
-            [0],
+            [],
+            [],
             color=color,
             marker=marker,
             markerfacecolor=color,
@@ -232,24 +214,12 @@ def make_figure(output_stem: Path, show_annotation: bool = False) -> None:
         )
         for name, color, marker in METHODS
     ]
-    handles.append(
-        plt.Line2D(
-            [0],
-            [0],
-            color="none",
-            marker="*",
-            markerfacecolor="#B24C88",
-            markeredgecolor=WHITE,
-            markersize=8,
-            label="Reference",
-        )
-    )
     fig.legend(
         handles=handles,
         loc="upper center",
-        bbox_to_anchor=(0.5, 0.86),
-        ncol=6,
-        fontsize=8.4,
+        bbox_to_anchor=(0.5, 0.88),
+        ncol=5,
+        fontsize=8,
         handletextpad=0.35,
         columnspacing=1.0,
     )

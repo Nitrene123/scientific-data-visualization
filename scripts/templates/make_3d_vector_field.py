@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, PRIMARY, SECONDARY, SEQUENTIAL_SAFE
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"], "svg.fonttype": "none", "pdf.fonttype": 42})
+    apply_paper_style()
     axis = np.linspace(-1.5, 1.5, 5)
     xx, yy, zz = np.meshgrid(axis, axis, axis, indexing="ij")
     u, v, w = -yy, xx, 0.45 * zz

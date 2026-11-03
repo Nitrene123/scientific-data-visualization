@@ -12,64 +12,55 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
+from palette import GOLD, GRID, PRIMARY
 import numpy as np
 from matplotlib.gridspec import GridSpecFromSubplotSpec
+from matplotlib.lines import Line2D
 
 
 @dataclass(frozen=True)
 class ModelPanel:
     name: str
-    train_color: str
-    test_color: str
     train_noise: float
     test_noise: float
     train_bias: float
     test_bias: float
-    metric_text: str
 
 
 PANELS = [
     ModelPanel(
         "RF",
-        train_color="#6fb8d7",
-        test_color="#e5bd50",
         train_noise=3.8,
         test_noise=9.4,
         train_bias=0.3,
         test_bias=1.8,
-        metric_text="Train R$^2$=0.982  RMSE=3.756\nTest  R$^2$=0.901  RMSE=9.417",
     ),
     ModelPanel(
         "XGBoost",
-        train_color="#54c887",
-        test_color="#df8984",
         train_noise=3.4,
         test_noise=7.0,
         train_bias=0.1,
         test_bias=1.4,
-        metric_text="Train R$^2$=0.986  RMSE=3.348\nTest  R$^2$=0.895  RMSE=6.998",
     ),
     ModelPanel(
         "LightGBM",
-        train_color="#a86cba",
-        test_color="#e8c65d",
         train_noise=4.4,
         test_noise=9.8,
         train_bias=0.4,
         test_bias=1.6,
-        metric_text="Train R$^2$=0.975  RMSE=4.429\nTest  R$^2$=0.892  RMSE=9.838",
     ),
     ModelPanel(
         "CatBoost",
-        train_color="#d96961",
-        test_color="#62bcb2",
         train_noise=7.1,
         test_noise=9.5,
         train_bias=0.2,
         test_bias=1.2,
-        metric_text="Train R$^2$=0.935  RMSE=7.150\nTest  R$^2$=0.899  RMSE=9.516",
     ),
 ]
+
+TRAIN_COLOR = PRIMARY
+TEST_COLOR = GOLD
 
 
 def configure_matplotlib() -> None:
@@ -88,6 +79,7 @@ def configure_matplotlib() -> None:
             "legend.frameon": False,
         }
     )
+    apply_paper_style()
 
 
 def make_actual_values(rng: np.random.Generator, n: int) -> np.ndarray:
@@ -110,6 +102,13 @@ def simulate_predictions(
     systematic = bias + shrink * (actual - 55.0)
     pred = actual + systematic + hetero
     return np.clip(pred, -6.0, 112.0)
+
+
+def regression_metrics(observed: np.ndarray, predicted: np.ndarray) -> tuple[float, float]:
+    ss_total = float(np.sum((observed - observed.mean()) ** 2))
+    r_squared = 1.0 - float(np.sum((observed - predicted) ** 2)) / ss_total
+    rmse = float(np.sqrt(np.mean((observed - predicted) ** 2)))
+    return r_squared, rmse
 
 
 def kde_1d(values: np.ndarray, grid: np.ndarray) -> np.ndarray:
@@ -175,16 +174,16 @@ def draw_scatter_panel(
     pred_train: np.ndarray,
     actual_test: np.ndarray,
     pred_test: np.ndarray,
-    panel: ModelPanel,
 ) -> None:
-    ax.plot([-5, 110], [-5, 110], color="#a5a5a5", lw=1.25, zorder=0)
+    ax.plot([-5, 110], [-5, 110], color="#777777", lw=0.9, linestyle="--", zorder=0)
     ax.scatter(
         actual_test,
         pred_test,
         s=23,
         facecolors="none",
-        edgecolors=mpl.colors.to_rgba(panel.test_color, 0.76),
-        linewidths=1.2,
+        edgecolors=mpl.colors.to_rgba(TEST_COLOR, 0.76),
+        marker="s",
+        linewidths=0.85,
         label="Test",
         zorder=2,
     )
@@ -193,30 +192,37 @@ def draw_scatter_panel(
         pred_train,
         s=23,
         facecolors="none",
-        edgecolors=mpl.colors.to_rgba(panel.train_color, 0.78),
-        linewidths=1.2,
+        edgecolors=mpl.colors.to_rgba(TRAIN_COLOR, 0.78),
+        marker="o",
+        linewidths=0.85,
         label="Train",
         zorder=3,
     )
     ax.set_xlim(-5, 110)
     ax.set_ylim(-5, 112)
-    ax.set_xlabel("Actual", fontsize=12, fontweight="bold", labelpad=2)
-    ax.set_ylabel("Predicted", fontsize=12, fontweight="bold", labelpad=2)
+    ax.set_xlabel("Actual", fontsize=9, labelpad=3)
+    ax.set_ylabel("Predicted", fontsize=9, labelpad=3)
     ax.tick_params(labelsize=8)
-    ax.legend(loc="upper left", fontsize=8, handletextpad=0.5, borderaxespad=0.45)
+    ax.grid(True, color=GRID, linestyle="--", linewidth=0.5, alpha=0.55)
+    train_r2, train_rmse = regression_metrics(actual_train, pred_train)
+    test_r2, test_rmse = regression_metrics(actual_test, pred_test)
+    metric_text = (
+        f"Train  R$^2$ = {train_r2:.2f}  RMSE = {train_rmse:.1f}\n"
+        f"Test    R$^2$ = {test_r2:.2f}  RMSE = {test_rmse:.1f}"
+    )
     ax.text(
-        0.28,
+        0.97,
         0.035,
-        panel.metric_text,
+        metric_text,
         transform=ax.transAxes,
-        fontsize=7.8,
-        ha="left",
+        fontsize=7.0,
+        ha="right",
         va="bottom",
-        bbox=dict(boxstyle="square,pad=0.22", facecolor="white", edgecolor="#777777", alpha=0.92),
+        bbox=dict(boxstyle="square,pad=0.18", facecolor="white", edgecolor="none", alpha=0.88),
     )
 
 
-def draw_model_panel(fig: plt.Figure, slot, panel: ModelPanel, seed: int) -> None:
+def draw_model_panel(fig: plt.Figure, slot, panel: ModelPanel, seed: int, panel_label: str) -> None:
     rng = np.random.default_rng(seed)
     actual_train = make_actual_values(rng, 230)
     actual_test = make_actual_values(rng, 92)
@@ -238,10 +244,12 @@ def draw_model_panel(fig: plt.Figure, slot, panel: ModelPanel, seed: int) -> Non
     ax_blank = fig.add_subplot(sub[0, 1])
     ax_blank.axis("off")
 
-    draw_top_distribution(ax_top, actual_train, actual_test, panel.train_color, panel.test_color)
-    draw_scatter_panel(ax_main, actual_train, pred_train, actual_test, pred_test, panel)
-    draw_right_distribution(ax_right, pred_train, pred_test, panel.train_color, panel.test_color)
-    ax_top.set_title(f"{panel.name} — Pred vs True (Hist+KDE)", fontsize=10.5, fontweight="bold", pad=5)
+    draw_top_distribution(ax_top, actual_train, actual_test, TRAIN_COLOR, TEST_COLOR)
+    draw_scatter_panel(ax_main, actual_train, pred_train, actual_test, pred_test)
+    draw_right_distribution(ax_right, pred_train, pred_test, TRAIN_COLOR, TEST_COLOR)
+    ax_top.set_title(panel.name, fontsize=9.5, fontweight="bold", pad=4)
+    ax_main.text(0.025, 0.97, panel_label, transform=ax_main.transAxes,
+                 ha="left", va="top", fontsize=10, fontweight="bold")
 
 
 def make_figure(output_stem: Path) -> None:
@@ -253,13 +261,28 @@ def make_figure(output_stem: Path) -> None:
         left=0.055,
         right=0.982,
         bottom=0.055,
-        top=0.960,
+        top=0.925,
         wspace=0.22,
         hspace=0.28,
     )
 
     for idx, panel in enumerate(PANELS):
-        draw_model_panel(fig, outer[idx // 2, idx % 2], panel, seed=20260505 + idx * 103)
+        draw_model_panel(fig, outer[idx // 2, idx % 2], panel,
+                         seed=20260505 + idx * 103, panel_label=chr(ord("a") + idx))
+
+    fig.legend(
+        handles=[
+            Line2D([], [], color=TRAIN_COLOR, marker="o", markerfacecolor="none", lw=1.2, label="Train"),
+            Line2D([], [], color=TEST_COLOR, marker="s", markerfacecolor="none", lw=1.2, label="Test"),
+        ],
+        loc="upper center",
+        bbox_to_anchor=(0.5, 0.985),
+        ncol=2,
+        frameon=False,
+        fontsize=8,
+        handlelength=1.6,
+        columnspacing=1.1,
+    )
 
     output_stem.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_stem.with_suffix(".png"), dpi=300, bbox_inches="tight")

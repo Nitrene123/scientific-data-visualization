@@ -6,7 +6,7 @@ Each id maps to a bundled script under `scripts/templates/`.
 | --- | --- | --- |
 | `multiclass-shap-combo` | `make_multiclass_shap_combo.py` | 多分类 SHAP 柱状图与蜂群图组合图 |
 | `paired-raincloud` | `make_paired_raincloud.py` | 配对云雨图 |
-| `cv-roc-ci` | `make_cv_roc_ci.py` | 交叉验证 ROC 曲线与置信区间图 |
+| `cv-roc-ci` | `make_cv_roc_ci.py` | 交叉验证 ROC 均值曲线、折间 SD 带与 AUC 汇总 |
 | `taylor-diagram` | `make_taylor_diagram.py` | 多模型评价泰勒图 |
 | `correlation-pairgrid` | `make_correlation_pairgrid.py` | 数据分布、拟合线、置信区间、相关系数组合图 |
 | `prediction-marginal-grid` | `make_prediction_marginal_grid.py` | 预测值与真实值边缘分布组合图 |
@@ -16,7 +16,7 @@ Each id maps to a bundled script under `scripts/templates/`.
 | `urban-park-cooling-combo` | `make_urban_park_cooling_combo.py` | 堆叠图 + 云雨图 + 箱线图组合图 |
 | `nature-chord-diagram` | `make_nature_chord_diagram.py` | Nature 风格和弦图 |
 | `grouped-comparison` | `make_grouped_comparison.py` | 分组比较、原始点、均值与 95% CI |
-| `faceted-errorbar-strip` | `make_faceted_errorbar_strip.py` | 多面板原始点、连接点线、误差棒与可选对数横轴基准图 |
+| `faceted-errorbar-strip` | `make_faceted_errorbar_strip.py` | 多面板重复测量原始点、均值与 95% t 区间；仅在配对数据中连线，可选对数横轴 |
 | `ridge-plot` | `make_ridge_plot.py` | 多组山脊密度图 |
 | `hexbin-fit` | `make_hexbin_fit.py` | 大样本 hexbin 密度与拟合趋势 |
 | `expression-heatmap` | `make_expression_heatmap.py` | 表达矩阵/特征强度热图 |

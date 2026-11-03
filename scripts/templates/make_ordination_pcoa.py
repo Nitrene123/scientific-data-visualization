@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.patches import Ellipse
 
@@ -26,6 +27,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     names = ["Control", "Treatment A", "Treatment B", "Treatment C"]
     centers = np.array([[-1.6, -0.7], [0.4, 0.7], [1.55, -0.45], [0.25, -1.55]])

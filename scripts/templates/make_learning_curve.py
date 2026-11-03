@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, PRIMARY
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     sizes = np.array([80, 140, 220, 320, 450, 600, 800, 1000])
     train = 0.985 - 0.035 * np.log1p(sizes / 90) / np.log(12)
     test = 0.63 + 0.30 * (1 - np.exp(-sizes / 340))

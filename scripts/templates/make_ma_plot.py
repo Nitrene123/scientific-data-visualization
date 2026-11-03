@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, MUTED, PRIMARY, SECONDARY
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     mean_expr = rng.uniform(0.0, 9.5, 950)
     log_fc = rng.normal(0, 0.18 + 0.16 * np.exp(-mean_expr / 2.4), mean_expr.size)

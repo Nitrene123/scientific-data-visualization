@@ -18,7 +18,7 @@
 | 预览图 | 对应模板 id |
 |---|---|
 | `paired_raincloud_replica.png` | `paired-raincloud` 配对云雨图 |
-| `cv_roc_ci_replica.png` | `cv-roc-ci` 交叉验证 ROC 与置信区间 |
+| `cv_roc_ci_replica.png` | `cv-roc-ci` 交叉验证 ROC 与折间 SD 带 |
 | `taylor_diagram_replica.png` | `taylor-diagram` 泰勒图 |
 | `correlation_pairgrid_replica.png` | `correlation-pairgrid` 相关矩阵组合图 |
 | `prediction_marginal_grid_replica.png` | `prediction-marginal-grid` 预测/真实值边缘分布 |
@@ -29,7 +29,7 @@
 | `nature_chord_diagram_replica.png` | `nature-chord-diagram` Nature 风格和弦图 |
 | `multiclass_shap_combo_replica.png` | `multiclass-shap-combo` 多分类 SHAP 组合图 |
 | `grouped_comparison_replica.png` | `grouped-comparison` 分组比较、原始点与 95% CI |
-| `faceted_errorbar_strip_replica.png` | `faceted-errorbar-strip` 多面板原始点、连接点线、误差棒与可选对数横轴 |
+| `faceted_errorbar_strip_replica.png` | `faceted-errorbar-strip` 多面板重复测量点、均值与 95% t 区间；仅配对数据连线 |
 | `ridge_plot_replica.png` | `ridge-plot` 多组密度山脊图 |
 | `hexbin_fit_replica.png` | `hexbin-fit` 大样本密度与拟合趋势 |
 | `expression_heatmap_replica.png` | `expression-heatmap` 表达矩阵热图 |

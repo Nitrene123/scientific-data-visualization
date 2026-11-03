@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 from matplotlib.patches import Rectangle
 import numpy as np
 
@@ -28,6 +29,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     data = [("Metabolism", [("Carbohydrate", 28), ("Lipid", 17), ("Amino acid", 12)]), ("Signaling", [("MAPK", 18), ("PI3K", 14), ("Wnt", 9)]), ("Cellular", [("Transport", 13), ("Cycle", 11), ("Apoptosis", 7)]), ("Immune", [("Innate", 10), ("Adaptive", 8), ("Cytokine", 6)])]
     total = sum(value for _, children in data for _, value in children)
     fig, ax = plt.subplots(figsize=(8.8, 5.8))

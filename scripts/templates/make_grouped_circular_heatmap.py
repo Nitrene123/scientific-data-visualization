@@ -12,6 +12,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.patches import Patch, Rectangle
 
@@ -65,6 +66,7 @@ def configure_matplotlib() -> None:
             "axes.linewidth": 0.8,
         }
     )
+    apply_paper_style()
 
 
 def make_trait_cmap(spec: TraitSpec) -> mpl.colors.LinearSegmentedColormap:
@@ -221,18 +223,18 @@ def draw_stars(
 
 
 def add_trait_colorbar_stack(fig: plt.Figure, cmaps: list[mpl.colors.Colormap], norm: mpl.colors.Normalize) -> None:
-    left = 0.735
-    bottom_top = 0.764
-    width = 0.095
-    height = 0.014
-    gap = 0.035
+    left = 0.765
+    bottom_top = 0.780
+    width = 0.075
+    height = 0.010
+    gap = 0.032
     gradient = np.linspace(-5, 5, 300).reshape(1, -1)
 
     fig.patches.append(
         Rectangle(
-            (left - 0.010, bottom_top - 7 * gap - 0.010),
-            0.245,
-            7 * gap + height + 0.030,
+            (left - 0.008, bottom_top - 7 * gap - 0.008),
+            0.208,
+            7 * gap + height + 0.024,
             transform=fig.transFigure,
             facecolor="white",
             edgecolor="none",
@@ -245,15 +247,15 @@ def add_trait_colorbar_stack(fig: plt.Figure, cmaps: list[mpl.colors.Colormap], 
         cax = fig.add_axes([left, bottom, width, height])
         cax.set_zorder(3)
         cax.imshow(gradient, aspect="auto", cmap=cmap, norm=norm, extent=(-5, 5, 0, 1))
-        cax.axvline(0, color="#333333", lw=0.8, ls=(0, (3, 2)))
+        cax.axvline(0, color="#333333", lw=0.65, ls=(0, (3, 2)))
         cax.set_yticks([])
         cax.set_xticks([-5, 0, 5])
-        cax.set_xticklabels(["-5", "0", "5"], fontsize=8)
-        cax.tick_params(axis="x", length=0, pad=1)
+        cax.set_xticklabels(["-5", "0", "5"], fontsize=6.5)
+        cax.tick_params(axis="x", length=0, pad=0.5)
         for spine in cax.spines.values():
             spine.set_color("#111111")
-            spine.set_linewidth(0.8)
-        fig.text(left + width + 0.014, bottom + height / 2, spec.name, va="center", ha="left", fontsize=11, zorder=3)
+            spine.set_linewidth(0.65)
+        fig.text(left + width + 0.010, bottom + height / 2, spec.name, va="center", ha="left", fontsize=8.5, zorder=3)
 
 
 def add_center_legend(fig: plt.Figure) -> None:
@@ -261,7 +263,7 @@ def add_center_legend(fig: plt.Figure) -> None:
     ax = fig.add_axes([left, bottom, width, height])
     ax.set_zorder(4)
     ax.axis("off")
-    ax.text(0.00, 1.02, "Exposure and outcome pairs", fontsize=9.5, fontweight="bold", ha="left", va="bottom")
+    ax.text(0.50, 0.73, "Exposure and outcome pairs", fontsize=9.5, fontweight="bold", ha="center", va="center")
 
     short_labels = [
         "Sleep → surface area",
@@ -279,8 +281,8 @@ def add_center_legend(fig: plt.Figure) -> None:
     ]
     ax.legend(
         handles=handles,
-        loc="upper left",
-        bbox_to_anchor=(0.00, 0.98),
+        loc="upper center",
+        bbox_to_anchor=(0.50, 0.58),
         frameon=False,
         fontsize=7.3,
         ncol=2,
@@ -309,8 +311,8 @@ def make_figure(output_stem: Path) -> None:
     ax.set_theta_direction(1)
     ax.set_axis_off()
     ax.set_facecolor("white")
-    fig.text(0.395, 0.985, "Grouped circular heatmap", ha="center", va="top", fontsize=16, weight="bold", color="#222222")
-    fig.text(0.395, 0.963, "Eight sleep-related traits across 92 exposure–outcome pairs", ha="center", va="top", fontsize=9.2, color="#5a5a5a")
+    fig.text(0.500, 0.985, "Grouped circular heatmap", ha="center", va="top", fontsize=16, weight="bold", color="#222222")
+    fig.text(0.500, 0.963, "Eight sleep-related traits across 92 exposure–outcome pairs", ha="center", va="top", fontsize=9.2, color="#5a5a5a")
 
     group_radius = 1.25
     group_height = 0.110
@@ -334,8 +336,8 @@ def make_figure(output_stem: Path) -> None:
         ax.plot(angles, np.full_like(angles, radius), color="white", lw=1.0, zorder=5)
 
     draw_stars(ax, theta, values, ring_radii, ring_height)
-    # The center key is the authoritative group label.  Omitting 92 tiny
-    # outer annotations keeps the circular layout clean at publication size.
+    # Label each of the eight group arcs; avoid the 92 crowded item labels.
+    draw_group_labels(ax, theta, outer_radius + 0.265, start_angle, step_angle)
 
     add_center_legend(fig)
     add_trait_colorbar_stack(fig, cmaps, norm)

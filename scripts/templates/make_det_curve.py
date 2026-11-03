@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, PRIMARY
@@ -38,6 +39,7 @@ def curve(scores: np.ndarray, labels: np.ndarray) -> tuple[np.ndarray, np.ndarra
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     labels = np.r_[np.ones(260, dtype=int), np.zeros(740, dtype=int)]
     scores = np.r_[rng.normal(0.72, 0.18, 260), rng.normal(0.30, 0.21, 740)]

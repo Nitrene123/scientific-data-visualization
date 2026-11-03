@@ -11,13 +11,14 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import HIGHLIGHT, PRIMARY, apply_paper_style
 import numpy as np
 from matplotlib.patches import Patch
 
 
 PALETTE = {
-    "Versicolor": {"edge": "#c9253e", "fill": "#ee7f8d"},
-    "Virginica": {"edge": "#145f86", "fill": "#6f9fba"},
+    "Versicolor": {"edge": HIGHLIGHT, "fill": "#F3B7B5"},
+    "Virginica": {"edge": PRIMARY, "fill": "#B7D1E5"},
 }
 
 
@@ -36,26 +37,21 @@ def configure_matplotlib() -> None:
             "legend.frameon": False,
         }
     )
+    apply_paper_style()
 
 
 def synthetic_sepal_width_data(seed: int = 20260624) -> dict[tuple[str, str], np.ndarray]:
-    """Create iris-like paired-condition data matching the reference figure."""
+    """Create deterministic repeated-measures data for the paired raincloud."""
     rng = np.random.default_rng(seed)
     n = 50
+    pre_versicolor = rng.normal(2.74, 0.31, n)
+    pre_virginica = rng.normal(3.00, 0.36, n)
     data = {
-        ("Pre", "Versicolor"): rng.normal(2.74, 0.31, n),
-        ("Pre", "Virginica"): rng.normal(3.00, 0.36, n),
-        ("Post", "Versicolor"): rng.normal(3.60, 0.35, n),
-        ("Post", "Virginica"): rng.normal(2.65, 0.30, n),
+        ("Pre", "Versicolor"): pre_versicolor,
+        ("Pre", "Virginica"): pre_virginica,
+        ("Post", "Versicolor"): pre_versicolor + rng.normal(0.86, 0.24, n),
+        ("Post", "Virginica"): pre_virginica + rng.normal(-0.35, 0.24, n),
     }
-
-    # Add a few deterministic tail observations so the clouds resemble the
-    # visual range of the reference without depending on external iris data.
-    data[("Pre", "Versicolor")][:5] = [2.10, 2.16, 2.30, 3.35, 3.45]
-    data[("Pre", "Virginica")][:5] = [2.30, 2.45, 3.55, 3.75, 3.86]
-    data[("Post", "Versicolor")][:6] = [2.55, 2.78, 3.95, 4.00, 4.15, 4.22]
-    data[("Post", "Virginica")][:6] = [2.08, 2.15, 2.20, 3.05, 3.25, 3.55]
-
     return {key: np.clip(values, 2.05, 4.35) for key, values in data.items()}
 
 
@@ -88,7 +84,7 @@ def draw_half_violin(
             anchor_x,
             facecolor=fill_color,
             edgecolor=edge_color,
-            linewidth=2.4,
+            linewidth=1.0,
             alpha=alpha,
             zorder=zorder,
         )
@@ -99,7 +95,7 @@ def draw_half_violin(
             anchor_x + density,
             facecolor=fill_color,
             edgecolor=edge_color,
-            linewidth=2.4,
+            linewidth=1.0,
             alpha=alpha,
             zorder=zorder,
         )
@@ -118,11 +114,11 @@ def draw_points(
     ax.scatter(
         x + jitter,
         values,
-        s=50,
+        s=23,
         facecolors=mpl.colors.to_rgba(fill_color, 0.56),
         edgecolors=edge_color,
-        linewidths=1.6,
-        alpha=0.82,
+        linewidths=0.55,
+        alpha=0.78,
         zorder=4,
     )
 
@@ -144,13 +140,13 @@ def draw_box(
         zorder=5,
     )
     for box in bp["boxes"]:
-        box.set(facecolor=mpl.colors.to_rgba(fill_color, 0.68), edgecolor=edge_color, linewidth=2.5)
+        box.set(facecolor=mpl.colors.to_rgba(fill_color, 0.55), edgecolor=edge_color, linewidth=1.0)
     for whisker in bp["whiskers"]:
-        whisker.set(color=edge_color, linewidth=2.4)
+        whisker.set(color=edge_color, linewidth=1.0)
     for cap in bp["caps"]:
-        cap.set(color=edge_color, linewidth=2.4)
+        cap.set(color=edge_color, linewidth=1.0)
     for median in bp["medians"]:
-        median.set(color=edge_color, linewidth=2.4)
+        median.set(color=edge_color, linewidth=1.0)
 
 
 def draw_mean_trend(
@@ -162,24 +158,36 @@ def draw_mean_trend(
         edge = PALETTE[species]["edge"]
         xs = [mean_positions[("Pre", species)], mean_positions[("Post", species)]]
         ys = [data[("Pre", species)].mean(), data[("Post", species)].mean()]
-        ax.plot(xs, ys, color=edge, linewidth=2.4, zorder=6)
-        ax.scatter(xs, ys, marker="D", s=95, color=edge, edgecolor=edge, zorder=7)
+        ax.plot(xs, ys, color=edge, linewidth=1.25, alpha=0.9, zorder=6)
+        ax.scatter(xs, ys, marker="D", s=34, color=edge, edgecolor="white", linewidth=0.55, zorder=7)
+
+
+def draw_pair_connectors(ax: plt.Axes, data: dict[tuple[str, str], np.ndarray], positions: dict[tuple[str, str], float]) -> None:
+    """Connect each synthetic subject's repeated measurement across conditions."""
+    for species, seed in [("Versicolor", 2), ("Virginica", 1)]:
+        rng = np.random.default_rng(seed)
+        jitter = rng.normal(0.0, 0.022, data[("Pre", species)].size)
+        x_pre = positions[("Pre", f"{species}_points")] + jitter
+        x_post = positions[("Post", f"{species}_points")] + jitter
+        color = PALETTE[species]["edge"]
+        for x0, x1, y0, y1 in zip(x_pre, x_post, data[("Pre", species)], data[("Post", species)]):
+            ax.plot([x0, x1], [y0, y1], color=color, linewidth=0.28, alpha=0.035, zorder=3)
 
 
 def draw_bottom_bracket(ax: plt.Axes, pre_x: float, post_x: float) -> None:
     transform = ax.get_xaxis_transform()
-    y = -0.115
-    tick_y = -0.138
-    ax.plot([pre_x, post_x], [y, y], transform=transform, color="black", linewidth=3.0, clip_on=False)
-    ax.plot([pre_x, pre_x], [y, tick_y], transform=transform, color="black", linewidth=3.0, clip_on=False)
-    ax.plot([post_x, post_x], [y, tick_y], transform=transform, color="black", linewidth=3.0, clip_on=False)
+    y = -0.105
+    tick_y = -0.120
+    ax.plot([pre_x, post_x], [y, y], transform=transform, color="black", linewidth=1.0, clip_on=False)
+    ax.plot([pre_x, pre_x], [y, tick_y], transform=transform, color="black", linewidth=1.0, clip_on=False)
+    ax.plot([post_x, post_x], [y, tick_y], transform=transform, color="black", linewidth=1.0, clip_on=False)
 
 
 def make_figure(output_stem: Path) -> None:
     configure_matplotlib()
     data = synthetic_sepal_width_data()
-    fig, ax = plt.subplots(figsize=(8.2, 7.8))
-    fig.subplots_adjust(left=0.13, right=0.78, bottom=0.22, top=0.90)
+    fig, ax = plt.subplots(figsize=(7.4, 5.8))
+    fig.subplots_adjust(left=0.12, right=0.98, bottom=0.22, top=0.86)
 
     positions = {
         ("Pre", "violin"): 0.76,
@@ -239,10 +247,12 @@ def make_figure(output_stem: Path) -> None:
         zorder=1,
     )
 
+    draw_pair_connectors(ax, data, positions)
+
     draw_points(ax, data[("Pre", "Virginica")], positions[("Pre", "Virginica_points")], PALETTE["Virginica"]["fill"], PALETTE["Virginica"]["edge"], 1)
     draw_points(ax, data[("Pre", "Versicolor")], positions[("Pre", "Versicolor_points")], PALETTE["Versicolor"]["fill"], PALETTE["Versicolor"]["edge"], 2)
-    draw_points(ax, data[("Post", "Virginica")], positions[("Post", "Virginica_points")], PALETTE["Virginica"]["fill"], PALETTE["Virginica"]["edge"], 3)
-    draw_points(ax, data[("Post", "Versicolor")], positions[("Post", "Versicolor_points")], PALETTE["Versicolor"]["fill"], PALETTE["Versicolor"]["edge"], 4)
+    draw_points(ax, data[("Post", "Virginica")], positions[("Post", "Virginica_points")], PALETTE["Virginica"]["fill"], PALETTE["Virginica"]["edge"], 1)
+    draw_points(ax, data[("Post", "Versicolor")], positions[("Post", "Versicolor_points")], PALETTE["Versicolor"]["fill"], PALETTE["Versicolor"]["edge"], 2)
 
     draw_box(ax, data[("Pre", "Versicolor")], positions[("Pre", "Versicolor_box")], PALETTE["Versicolor"]["fill"], PALETTE["Versicolor"]["edge"])
     draw_box(ax, data[("Pre", "Virginica")], positions[("Pre", "Virginica_box")], PALETTE["Virginica"]["fill"], PALETTE["Virginica"]["edge"])
@@ -260,42 +270,44 @@ def make_figure(output_stem: Path) -> None:
     ax.set_xlim(0.30, 3.12)
     ax.set_ylim(2.0, 4.5)
     ax.set_yticks(np.arange(2.0, 4.51, 0.5))
-    ax.set_ylabel("Sepal Width", fontsize=20, fontweight="bold", labelpad=18)
+    ax.set_ylabel("Response (a.u.)", fontsize=9, labelpad=7)
     ax.set_xticks([])
     ax.spines["bottom"].set_visible(False)
-    ax.spines["left"].set_linewidth(2.8)
-    ax.tick_params(axis="y", labelsize=19, width=2.8, length=11, pad=6)
+    ax.spines["left"].set_linewidth(0.9)
+    ax.tick_params(axis="y", labelsize=8, width=0.75, length=3, pad=4)
 
     pre_label_x = 1.15
     post_label_x = 2.17
     draw_bottom_bracket(ax, pre_label_x, post_label_x)
     transform = ax.get_xaxis_transform()
-    ax.text(pre_label_x, -0.170, "Pre", transform=transform, ha="center", va="top", fontsize=20)
-    ax.text(post_label_x, -0.170, "Post", transform=transform, ha="center", va="top", fontsize=20)
+    ax.text(pre_label_x, -0.145, "Pre", transform=transform, ha="center", va="top", fontsize=8.5)
+    ax.text(post_label_x, -0.145, "Post", transform=transform, ha="center", va="top", fontsize=8.5)
     ax.text(
         (pre_label_x + post_label_x) / 2,
-        -0.255,
-        "Fertilizer Treatment",
+        -0.225,
+        "Condition",
         transform=transform,
         ha="center",
         va="top",
-        fontsize=20,
+        fontsize=9.5,
         fontweight="bold",
     )
 
     legend_handles = [
-        Patch(facecolor=PALETTE["Versicolor"]["fill"], edgecolor=PALETTE["Versicolor"]["fill"], label="Versicolor"),
-        Patch(facecolor=PALETTE["Virginica"]["fill"], edgecolor=PALETTE["Virginica"]["fill"], label="Virginica"),
+        Patch(facecolor=PALETTE["Versicolor"]["fill"], edgecolor=PALETTE["Versicolor"]["fill"], label="Group A"),
+        Patch(facecolor=PALETTE["Virginica"]["fill"], edgecolor=PALETTE["Virginica"]["fill"], label="Group B"),
     ]
     fig.legend(
         handles=legend_handles,
-        title="Flower Species",
-        loc="upper right",
-        bbox_to_anchor=(0.96, 0.965),
-        fontsize=18,
-        title_fontsize=20,
-        handlelength=1.8,
-        borderaxespad=0,
+        title="Group",
+        loc="upper center",
+        bbox_to_anchor=(0.55, 0.99),
+        ncol=2,
+        fontsize=8,
+        title_fontsize=8.5,
+        handlelength=1.5,
+        columnspacing=1.0,
+        borderaxespad=0.2,
     )
 
     output_stem.parent.mkdir(parents=True, exist_ok=True)

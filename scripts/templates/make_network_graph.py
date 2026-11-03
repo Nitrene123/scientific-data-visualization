@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 
@@ -25,6 +26,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans"})
+    apply_paper_style()
     labels = ["Gene A", "Gene B", "Gene C", "Gene D", "Gene E", "Gene F", "Gene G", "Gene H", "Gene I", "Gene J"]
     groups = np.array([0, 0, 1, 1, 1, 2, 2, 0, 2, 1])
     colors = ["#4e79a7", "#e15759", "#59a14f"]

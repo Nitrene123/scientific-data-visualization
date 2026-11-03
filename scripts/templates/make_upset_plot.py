@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 
@@ -25,6 +26,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     sets = ["RNA-seq", "Proteomics", "Metabolomics", "ATAC-seq", "Screen"]
     membership = np.array([[1, 1, 0, 0, 0], [1, 0, 1, 0, 0], [1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 1, 1, 0], [1, 1, 0, 0, 1], [0, 1, 1, 0, 1], [1, 1, 1, 1, 0], [0, 0, 1, 1, 1], [1, 0, 1, 1, 1]])
     counts = np.array([28, 22, 19, 17, 14, 12, 10, 9, 7, 5])

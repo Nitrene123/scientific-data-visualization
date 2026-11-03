@@ -12,6 +12,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.path import Path as MplPath
 from matplotlib.patches import PathPatch, Wedge
@@ -73,6 +74,7 @@ def configure_matplotlib() -> None:
             "axes.linewidth": 0.8,
         }
     )
+    apply_paper_style()
 
 
 def polar_to_xy(theta_deg: float, radius: float) -> np.ndarray:

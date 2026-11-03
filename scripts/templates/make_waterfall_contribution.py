@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, INK, PRIMARY, SECONDARY
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     labels = ["Baseline", "Volume", "Price", "Mix", "Returns", "Other", "Final"]
     contributions = np.array([120, 38, 24, -18, -11, 9, 0], dtype=float)
     cumulative = np.r_[0, np.cumsum(contributions[:-1])]

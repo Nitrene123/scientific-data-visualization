@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.patches import Patch
@@ -51,6 +52,7 @@ def configure_matplotlib() -> None:
             "legend.frameon": False,
         }
     )
+    apply_paper_style()
 
 
 def importance_table() -> np.ndarray:

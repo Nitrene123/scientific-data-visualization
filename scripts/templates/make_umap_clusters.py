@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 
@@ -25,6 +26,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     centers = np.array([[-1.8, 0.9], [-0.35, 1.2], [1.45, 0.55], [-1.15, -1.15], [0.55, -1.0], [1.75, -1.45]])
     colors = ["#e15759", "#59a14f", "#4e79a7", "#f28e2b", "#b07aa1", "#76b7b2"]

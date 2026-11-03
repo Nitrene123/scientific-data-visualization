@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 
@@ -25,6 +26,7 @@ def configure_matplotlib() -> None:
             "axes.linewidth": 0.8,
         }
     )
+    apply_paper_style()
 
 
 def true_rmse_surface(max_depth: np.ndarray, n_estimators: np.ndarray) -> np.ndarray:

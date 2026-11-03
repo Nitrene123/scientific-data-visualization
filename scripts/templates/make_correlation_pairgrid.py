@@ -12,6 +12,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 
@@ -32,6 +33,7 @@ def configure_matplotlib() -> None:
             "ytick.major.size": 1.8,
         }
     )
+    apply_paper_style()
 
 
 def simulate_data(seed: int = 20260629, n_samples: int = 130) -> np.ndarray:

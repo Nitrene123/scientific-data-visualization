@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, SEQUENTIAL_SAFE
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"], "svg.fonttype": "none", "pdf.fonttype": 42})
+    apply_paper_style()
     axis = np.linspace(-2.0, 2.0, 9)
     xx, yy, zz = np.meshgrid(axis, axis, axis, indexing="ij")
     values = np.exp(-((xx + 0.65) ** 2 + (yy - 0.25) ** 2 + (zz + 0.25) ** 2) / 1.05) + 0.85 * np.exp(-((xx - 0.75) ** 2 + (yy + 0.55) ** 2 + (zz - 0.55) ** 2) / 0.72)

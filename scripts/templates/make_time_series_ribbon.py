@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, HIGHLIGHT, PRIMARY
@@ -27,13 +28,14 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     x = np.arange(0, 36)
     mean = 48 + 0.42 * x + 4.4 * np.sin(x / 3.4) + 0.07 * x**1.45
     width = 3.4 + 0.06 * x
     lower, upper = mean - width, mean + width
     fig, ax = plt.subplots(figsize=(8.5, 5.7))
     ax.axvspan(13, 20, color=HIGHLIGHT, alpha=0.10, label="Intervention window")
-    ax.fill_between(x, lower, upper, color=PRIMARY, alpha=0.16, linewidth=0, label="95% uncertainty band")
+    ax.fill_between(x, lower, upper, color=PRIMARY, alpha=0.16, linewidth=0, label="Illustrative uncertainty band")
     ax.plot(x, mean, color=PRIMARY, lw=2.1, marker="o", ms=3.2, label="Estimated mean")
     ax.axvline(13, color=HIGHLIGHT, ls="--", lw=1.0)
     ax.axvline(20, color=HIGHLIGHT, ls="--", lw=1.0)

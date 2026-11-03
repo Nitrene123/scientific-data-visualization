@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import MUTED, PRIMARY, apply_paper_style
 import numpy as np
 
 
@@ -25,6 +26,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     n_pos, n_neg = 170, 830
     scores_pos = rng.normal(0.74, 0.18, n_pos)
@@ -42,13 +44,11 @@ def main() -> None:
     baseline = n_pos / labels.size
 
     fig, ax = plt.subplots(figsize=(7.4, 6.0))
-    ax.step(recall, precision, where="post", color="#1b6ca8", lw=2.0, label=f"Model (AP = {ap:.3f})")
-    band = 0.025 + 0.035 * (1 - recall) ** 0.7
-    ax.fill_between(recall, np.clip(precision - band, 0, 1), np.clip(precision + band, 0, 1), step="post", color="#1b6ca8", alpha=0.13, lw=0)
-    ax.axhline(baseline, color="#9a4d2f", ls="--", lw=1.1, label=f"Prevalence baseline = {baseline:.2f}")
+    ax.step(recall, precision, where="post", color=PRIMARY, lw=1.7, label=f"Model (AP = {ap:.3f})")
+    ax.axhline(baseline, color=MUTED, ls="--", lw=1.0, label=f"Prevalence baseline = {baseline:.2f}")
     ax.set(xlim=(0, 1), ylim=(0, 1.02), xlabel="Recall / sensitivity", ylabel="Precision / positive predictive value")
     ax.set_title("Precision–recall curve for an imbalanced classifier", pad=13, weight="bold")
-    ax.grid(True, color="#b8c2c9", alpha=0.30, linewidth=0.6)
+    ax.grid(True, color="#D9D9D9", linestyle="--", alpha=0.65, linewidth=0.55)
     ax.legend(loc="lower left", frameon=True, framealpha=0.90, fontsize=9)
     ax.text(0.98, 0.04, "Positive class: 17%", transform=ax.transAxes, ha="right", va="bottom", fontsize=9, color="#555555")
     fig.tight_layout()

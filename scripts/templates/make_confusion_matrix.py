@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import INK, GRID, MUTED
@@ -27,6 +28,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     cm = np.array([[845, 65], [42, 48]])
     row_pct = cm / cm.sum(axis=1, keepdims=True)
     fig, ax = plt.subplots(figsize=(6.5, 5.8))

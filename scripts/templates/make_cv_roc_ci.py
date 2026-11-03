@@ -12,6 +12,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style, series_style
 import numpy as np
 
 
@@ -21,16 +22,17 @@ class ModelSpec:
     auc_mean: float
     auc_std: float
     color: str
+    marker: str
     ci_alpha: float
     noise: float
 
 
 MODEL_SPECS = [
-    ModelSpec("LR", 0.889, 0.026, "#2d214c", 0.16, 0.030),
-    ModelSpec("RF", 0.906, 0.029, "#8f3032", 0.13, 0.026),
-    ModelSpec("XGBoost", 0.895, 0.032, "#c47b4b", 0.14, 0.030),
-    ModelSpec("LightGBM", 0.902, 0.039, "#3c8849", 0.15, 0.035),
-    ModelSpec("SVM", 0.861, 0.043, "#242585", 0.16, 0.042),
+    ModelSpec("LR", 0.889, 0.026, **series_style(0), ci_alpha=0.16, noise=0.030),
+    ModelSpec("RF", 0.906, 0.029, **series_style(1), ci_alpha=0.13, noise=0.026),
+    ModelSpec("XGBoost", 0.895, 0.032, **series_style(2), ci_alpha=0.14, noise=0.030),
+    ModelSpec("LightGBM", 0.902, 0.039, **series_style(3), ci_alpha=0.15, noise=0.035),
+    ModelSpec("SVM", 0.861, 0.043, **series_style(4), ci_alpha=0.16, noise=0.042),
 ]
 
 
@@ -48,6 +50,7 @@ def configure_matplotlib() -> None:
             "legend.frameon": True,
         }
     )
+    apply_paper_style()
 
 
 def auc_to_curve_exponent(auc: float) -> float:
@@ -123,83 +126,31 @@ def simulate_cv_rocs(
     return fold_curves, mean_tpr, lower, upper
 
 
-def add_caption_and_table(fig: plt.Figure) -> None:
-    caption_ax = fig.add_axes([0.06, 0.165, 0.88, 0.055])
-    caption_ax.axis("off")
-    caption_ax.text(
-        0.00,
-        0.70,
-        "Fig. 2",
-        fontsize=9,
-        fontweight="bold",
-        ha="left",
-        va="center",
-    )
-    caption_ax.text(
-        0.058,
-        0.70,
-        "The average AUC performance of five machine learning models subjected to fivefold external cross-validation",
-        fontsize=8.5,
-        color="#4b4b4b",
-        ha="left",
-        va="center",
-    )
-
-    table_ax = fig.add_axes([0.045, 0.035, 0.91, 0.095])
-    table_ax.axis("off")
-    table_ax.text(0.00, 0.88, "Table 3", fontsize=9, fontweight="bold", ha="left", va="center")
-    table_ax.text(
-        0.082,
-        0.88,
-        "Comparative analysis of the performance outcomes across various machine learning models",
-        fontsize=8.5,
-        color="#4b4b4b",
-        ha="left",
-        va="center",
-    )
-
-    columns = [
-        "Model",
-        "F1 score (%)",
-        "Accuracy (%)",
-        "Recall (%)",
-        "Precision (%)",
-        "AUC (%)",
-        "Sensitivity (%)",
-        "Specificity (%)",
-    ]
-    row = ["LR model", "80.8", "84.7", "80.0", "81.6", "89.6", "80.0", "87.8"]
-    xs = np.array([0.00, 0.165, 0.285, 0.410, 0.535, 0.662, 0.792, 0.925])
-
-    table_ax.plot([0, 1], [0.67, 0.67], color="#b8b8b8", linewidth=0.8)
-    table_ax.plot([0, 1], [0.37, 0.37], color="#b8b8b8", linewidth=0.8)
-    for x, label in zip(xs, columns):
-        table_ax.text(x, 0.52, label, fontsize=7.5, fontweight="bold", ha="left", va="center")
-    for x, value in zip(xs, row):
-        table_ax.text(x, 0.18, value, fontsize=7.3, color="#555555", ha="left", va="center")
-    table_ax.set_xlim(0, 1)
-    table_ax.set_ylim(0, 1)
-
-
 def make_figure(output_stem: Path) -> None:
     configure_matplotlib()
     grid = np.linspace(0.0, 1.0, 101)
 
-    fig = plt.figure(figsize=(7.4, 7.8))
-    ax = fig.add_axes([0.17, 0.255, 0.70, 0.70])
+    fig = plt.figure(figsize=(4.8, 4.6))
+    ax = fig.add_axes([0.15, 0.16, 0.80, 0.75])
+    fig.suptitle("Illustrative five-fold ROC comparison", y=0.98, fontsize=11, fontweight="bold")
 
     legend_handles = []
     legend_labels = []
     for idx, spec in enumerate(MODEL_SPECS):
         fold_curves, mean_tpr, lower, upper = simulate_cv_rocs(spec, grid, seed=814 + idx * 17)
+        fold_aucs = np.array(
+            [np.sum(np.diff(fpr) * (tpr[:-1] + tpr[1:]) * 0.5) for fpr, tpr in fold_curves]
+        )
+        auc_mean = float(fold_aucs.mean())
+        auc_sd = float(fold_aucs.std(ddof=1))
         for fpr, tpr in fold_curves:
             ax.step(
                 fpr,
                 tpr,
                 where="post",
                 color=spec.color,
-                alpha=0.13,
-                linewidth=0.65,
+                alpha=0.09,
+                linewidth=0.55,
                 zorder=1,
             )
         ax.fill_between(
@@ -208,7 +159,7 @@ def make_figure(output_stem: Path) -> None:
             upper,
             step="post",
             color=spec.color,
-            alpha=spec.ci_alpha,
+            alpha=min(spec.ci_alpha, 0.11),
             linewidth=0,
             zorder=2,
         )
@@ -217,36 +168,49 @@ def make_figure(output_stem: Path) -> None:
             mean_tpr,
             where="post",
             color=spec.color,
-            linewidth=1.15,
+            linewidth=1.35,
+            marker=spec.marker,
+            markevery=12,
+            markersize=3.2,
             zorder=4,
         )
         legend_handles.append(line)
-        legend_labels.append(f"{spec.name:<8}: {spec.auc_mean:.3f}±{spec.auc_std:.3f} (p<0.01)")
+        legend_labels.append(f"{spec.name}: {auc_mean:.3f} ± {auc_sd:.3f}")
 
-    ax.plot([0, 1], [0, 1], linestyle="--", color="#a34545", linewidth=0.8, alpha=0.78, zorder=0)
+    ax.plot([0, 1], [0, 1], linestyle="--", color="#777777", linewidth=0.8, alpha=0.78, zorder=0)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_xlabel("False Positive Rate", fontsize=10)
-    ax.set_ylabel("True Positive Rate", fontsize=10)
+    ax.set_xlabel("False positive rate", fontsize=9)
+    ax.set_ylabel("True positive rate", fontsize=9)
     ax.set_xticks(np.arange(0.0, 1.01, 0.1))
     ax.set_yticks(np.arange(0.0, 1.01, 0.1))
-    ax.tick_params(labelsize=8.5, length=3, width=0.7)
+    ax.tick_params(labelsize=8, length=2.5, width=0.7)
     ax.grid(True, color="#bcbcbc", alpha=0.28, linewidth=0.6)
     ax.legend(
         legend_handles,
         legend_labels,
         loc="lower right",
-        fontsize=9,
-        framealpha=0.72,
+        fontsize=7.5,
+        title="AUC mean ± SD across folds",
+        title_fontsize=7.5,
+        framealpha=0.9,
         facecolor="white",
         edgecolor="#d9d9d9",
         handlelength=2.1,
-        labelspacing=0.65,
+        labelspacing=0.45,
         borderpad=0.45,
     )
 
-    add_caption_and_table(fig)
+    fig.text(
+        0.5,
+        0.035,
+        "Synthetic example; shaded bands show ±1 SD across folds",
+        ha="center",
+        va="center",
+        fontsize=7,
+        color="#555555",
+    )
 
     output_stem.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_stem.with_suffix(".png"), dpi=300, bbox_inches="tight")

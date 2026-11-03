@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 
 from palette import GRID, QUALITATIVE
@@ -18,6 +19,7 @@ from palette import GRID, QUALITATIVE
 
 def configure_matplotlib() -> None:
     mpl.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"], "svg.fonttype": "none", "pdf.fonttype": 42, "font.size": 9.5})
+    apply_paper_style()
 
 
 def save(fig: plt.Figure) -> None:

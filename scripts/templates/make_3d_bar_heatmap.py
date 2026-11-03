@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 from matplotlib.cm import ScalarMappable
 from matplotlib.lines import Line2D
 from matplotlib.colors import Normalize
@@ -30,6 +31,7 @@ def configure_matplotlib() -> None:
             "axes.linewidth": 0.75,
         }
     )
+    apply_paper_style()
 
 
 def response_surface(hours: np.ndarray, days: np.ndarray) -> np.ndarray:

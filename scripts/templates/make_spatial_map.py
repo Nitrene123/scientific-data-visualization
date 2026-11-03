@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 from matplotlib.patches import Polygon
 import numpy as np
 
@@ -26,6 +27,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     regions = [np.array([[0.2, 0.7], [2.3, 1.0], [2.8, 2.5], [1.5, 3.5], [0.1, 2.7]]), np.array([[2.8, 2.5], [4.3, 3.1], [5.5, 2.2], [4.9, 0.8], [2.3, 1.0]]), np.array([[0.1, 2.7], [1.5, 3.5], [3.0, 4.4], [4.3, 3.1], [2.8, 2.5]])]
     colors = ["#d9edf7", "#91c9e8", "#357ebd"]
     rng = np.random.default_rng(20260911)

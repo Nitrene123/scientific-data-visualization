@@ -2,15 +2,15 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-A reproducible Agent Skill for scientific data visualization with 51 runnable Matplotlib templates, chart-selection guidance, the original compatible palette, and PNG/PDF/SVG export.
+A reproducible Agent Skill for scientific data visualization with 51 runnable Matplotlib templates, chart-selection guidance, a shared paper-inspired style, and PNG/PDF/SVG export.
 
 ## Features
 
 - Covers comparison, distribution, correlation, dimensionality reduction, model evaluation, survival analysis, omics, time series, spatial/network data, and 3D data.
 - Includes 3D bar matrices, heatmap projections, response surfaces, 3D scatter, volume, and vector-field templates; use 3D only when the third dimension has a real scientific meaning.
-- Keeps the original project palette by default and provides `viridis`, `magma`, and `RdBu_r` for continuous values.
+- Applies shared paper-inspired typography, axes, grid, and categorical colors while retaining semantic sequential and diverging maps.
 - Includes deterministic example data, 51 preview images, and reproducible scripts that export PNG, PDF, and SVG.
-- Includes faceted benchmark strips with raw replicate points, connected markers, uncertainty intervals, and optional log-scaled x-axes.
+- Includes faceted benchmark strips with raw replicate points, bivariate mean intervals, and optional log-scaled x-axes; independent replicates are not joined by lines.
 - Provides chart-selection boundaries and scientific figure quality-control guidance.
 
 ## Usage
@@ -216,7 +216,7 @@ scientific-data-visualization/
 
 ## Palette
 
-`scripts/palette.py` keeps the original project palette as the default theme. Use `QUALITATIVE` for unordered groups, `viridis` or `magma` for ordered values, and `RdBu_r` for data centered on a meaningful midpoint. The two bar-matrix templates, `3d-bar-heatmap` and `3d-bar-heat-projection`, use the dedicated `THREED` scale from pale mint/teal through yellow to warm orange/red. Do not define a conflicting color system inside individual templates.
+`scripts/palette.py` provides `apply_paper_style()`, the paper-inspired categorical colors, paired marker shapes, and `series_style()` for custom series. Use `QUALITATIVE` for unordered groups, `viridis` or `magma` for ordered values, and `RdBu_r` for data centered on a meaningful midpoint. The two bar-matrix templates, `3d-bar-heatmap` and `3d-bar-heat-projection`, retain the dedicated `THREED` response scale. Keep model color and marker mappings stable within a composite figure, and do not infer values or uncertainty from reference images.
 
 ## Content responsibility
 

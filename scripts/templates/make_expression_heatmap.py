@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 import numpy as np
 from matplotlib.patches import Patch
 
@@ -26,6 +27,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "svg.fonttype": "none", "pdf.fonttype": 42})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     n_features, n_samples = 28, 18
     base = rng.normal(0, 0.55, (n_features, n_samples))

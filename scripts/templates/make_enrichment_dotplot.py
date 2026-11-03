@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import apply_paper_style
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 import numpy as np
@@ -29,6 +30,7 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     terms = ["Oxidative phosphorylation", "Cell cycle regulation", "DNA repair", "Lipid metabolism", "Immune response", "Autophagy", "RNA processing", "Stress response", "Chromatin organization"]
     rich_factor = np.array([0.42, 0.31, 0.27, 0.23, 0.21, 0.18, 0.16, 0.13, 0.11])
     counts = np.array([38, 31, 27, 24, 22, 19, 17, 15, 12])

@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import QUALITATIVE, apply_paper_style
 import numpy as np
 
 
@@ -25,25 +26,25 @@ def save(fig: plt.Figure) -> None:
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
+    apply_paper_style()
     rng = np.random.default_rng(20260911)
     groups = ["Control", "Low dose", "Medium dose", "High dose"]
-    colors = ["#4c78a8", "#72b7b2", "#f2cf5b", "#e45756"]
+    colors = QUALITATIVE[: len(groups)]
     means = np.array([1.02, 1.34, 1.72, 2.06])
     samples = [rng.normal(mu, 0.18 + i * 0.015, 12) for i, mu in enumerate(means)]
     x = np.arange(len(groups))
     fig, ax = plt.subplots(figsize=(8.2, 5.8))
     for i, (values, color) in enumerate(zip(samples, colors)):
         mean = values.mean()
-        ci = 1.96 * values.std(ddof=1) / np.sqrt(values.size)
-        ax.errorbar(i, mean, yerr=ci, fmt="o", color="#202020", ecolor="#202020", capsize=5, lw=1.8, ms=8, zorder=4)
+        ci = 2.201 * values.std(ddof=1) / np.sqrt(values.size)  # 95% t interval, n=12
+        ax.errorbar(i, mean, yerr=ci, fmt="o", color=color, ecolor=color, capsize=3.2, lw=1.1, ms=5.5, zorder=4)
         jitter = rng.normal(0, 0.055, values.size)
-        ax.scatter(i + jitter, values, s=42, color=color, edgecolor="white", linewidth=0.8, alpha=0.9, zorder=3)
-    ax.plot(x, [v.mean() for v in samples], color="#333333", lw=1.2, alpha=0.55, zorder=2)
-    ax.set_xticks(x, groups)
+        ax.scatter(i + jitter, values, s=24, color=color, edgecolor="white", linewidth=0.45, alpha=0.78, zorder=3)
+    ax.plot(x, [v.mean() for v in samples], color="#555555", lw=1.0, alpha=0.65, zorder=2)
+    ax.set_xticks(x, [f"{group}\n(n={values.size})" for group, values in zip(groups, samples)])
     ax.set_ylabel("Normalized response")
     ax.set_title("Grouped comparison with raw observations and 95% CI", pad=14, weight="bold")
     ax.grid(axis="y", color="#dddddd", lw=0.8, alpha=0.7)
-    ax.text(0.02, 0.96, "points = observations · dot = mean", transform=ax.transAxes, va="top", fontsize=9, color="#555555")
     fig.tight_layout()
     save(fig)
 

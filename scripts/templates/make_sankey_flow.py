@@ -11,6 +11,7 @@ import matplotlib as mpl
 mpl.use("Agg")
 
 import matplotlib.pyplot as plt
+from palette import QUALITATIVE, apply_paper_style
 from matplotlib.patches import Polygon, Rectangle
 import numpy as np
 
@@ -35,7 +36,8 @@ def ribbon(ax: plt.Axes, x0: float, x1: float, y0: float, y1: float, width0: flo
 
 def main() -> None:
     mpl.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False})
-    colors = {"A": "#4e79a7", "B": "#f28e2b", "C": "#59a14f", "D": "#e15759"}
+    apply_paper_style()
+    colors = dict(zip(("A", "B", "C", "D"), QUALITATIVE[:4]))
     flows = [("A", "A", 34), ("A", "B", 18), ("B", "B", 24), ("B", "C", 20), ("C", "C", 28), ("C", "D", 13), ("D", "A", 10), ("D", "D", 18)]
     fig, ax = plt.subplots(figsize=(8.5, 5.8))
     left_y = {"A": 3.35, "B": 2.15, "C": 1.05, "D": 0.15}
