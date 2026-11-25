@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 51 个可直接运行的 Matplotlib 模板、选图规则、统一论文风格以及 PNG/PDF/SVG 导出流程。
+面向 Codex、Claude 和其他 Agent 的可复现科研数据可视化技能，提供 52 个可直接运行的 Matplotlib 模板、选图规则、统一论文风格以及 PNG/PDF/SVG 导出流程。
 
 ## 主要功能
 
@@ -10,7 +10,7 @@
 - 内置 3D 柱阵、热力投影、响应面、3D 散点、体数据和向量场模板。
 - 采用受参考论文启发的无衬线字体、克制网格和稳定的分类配色；多模型图用固定的颜色—标记映射，连续与发散色图仍按数据含义选择。
 - 区分标准差、置信区间和示意性带；只展示由数据计算的统计量，不添加没有检验依据的显著性标记。
-- 提供 51 张预览图、51 个模板脚本以及 PNG、PDF、SVG 输出。
+- 提供 52 张预览图、52 个模板脚本以及 PNG、PDF、SVG 输出。
 
 ## 使用方式
 
@@ -47,11 +47,11 @@ Copy-Item -Path (Join-Path $repo "*") -Destination $claudeSkill -Recurse -Force
 
 - 确认 `SKILL.md` 位于技能目录第一层。
 - 新开会话或重启 Agent。
-- 运行 `python scripts/render_template.py --list` 确认 51 个模板可见。
+- 运行 `python scripts/render_template.py --list` 确认 52 个模板可见。
 
 ## 模板预览
 
-英文主 README 包含 51 张模板缩略图画廊；完整原图位于 [assets/previews](assets/previews)。
+英文主 README 包含 52 张模板缩略图画廊；完整原图位于 [assets/previews](assets/previews)。
 
 ## 限制
 

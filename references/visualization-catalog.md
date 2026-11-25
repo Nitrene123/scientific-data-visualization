@@ -12,7 +12,7 @@
 
 ## 随 skill 分发的版式参考（`assets/previews/`）
 
-以下 51 张是**实际可运行的模板渲染结果**，比外部图集更可靠——它们与本 skill 的
+以下 52 张是**实际可运行的模板渲染结果**，比外部图集更可靠——它们与本 skill 的
 `scripts/templates/` 一一对应，可直接对照版式并立即复现：
 
 | 预览图 | 对应模板 id |
@@ -59,6 +59,7 @@
 | `treemap_hierarchy_replica.png` | `treemap-hierarchy` 层级组成树图 |
 | `waterfall_contribution_replica.png` | `waterfall-contribution` 贡献分解瀑布图 |
 | `time_series_ribbon_replica.png` | `time-series-ribbon` 时间序列与不确定性 |
+| `time_series_summary_combo_replica.png` | `time-series-summary-combo` 时序轨迹与积分总量 |
 | `3d_scatter_replica.png` | `3d-scatter` 三维聚类散点 |
 | `3d_volume_replica.png` | `3d-volume` 三维体素/阈值体数据 |
 | `3d_vector_field_replica.png` | `3d-vector-field` 三维向量场 |

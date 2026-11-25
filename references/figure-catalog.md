@@ -46,6 +46,7 @@ Each id maps to a bundled script under `scripts/templates/`.
 | `treemap-hierarchy` | `make_treemap_hierarchy.py` | 层级组成矩形树图（兼容旭日图选型） |
 | `waterfall-contribution` | `make_waterfall_contribution.py` | 正负贡献分解瀑布图 |
 | `time-series-ribbon` | `make_time_series_ribbon.py` | 时间序列、置信带与事件窗口 |
+| `time-series-summary-combo` | `make_time_series_summary_combo.py` | 时序速率曲线与由曲线积分得到的总量对比 |
 | `3d-scatter` | `make_3d_scatter.py` | 三维聚类散点与中心点 |
 | `3d-volume` | `make_3d_volume.py` | 三维体素/阈值体数据 |
 | `3d-vector-field` | `make_3d_vector_field.py` | 三维向量场与 quiver 箭头 |
@@ -107,6 +108,7 @@ Prompts from the MathModel Improve tab should include `$mathmodel-figure-templat
 | `treemap-hierarchy` | `assets/previews/treemap_hierarchy_replica.png` |
 | `waterfall-contribution` | `assets/previews/waterfall_contribution_replica.png` |
 | `time-series-ribbon` | `assets/previews/time_series_ribbon_replica.png` |
+| `time-series-summary-combo` | `assets/previews/time_series_summary_combo_replica.png` |
 | `3d-scatter` | `assets/previews/3d_scatter_replica.png` |
 | `3d-volume` | `assets/previews/3d_volume_replica.png` |
 | `3d-vector-field` | `assets/previews/3d_vector_field_replica.png` |

@@ -22,6 +22,7 @@
 | Treemap / Sunburst | 父子层级中的组成和占比 | `treemap-hierarchy` | 面积编码总量，层级边界清楚 |
 | 瀑布图 | 基线到终值的正负增量分解 | `waterfall-contribution` | 只有可加总贡献才使用 |
 | 时间序列置信带 | 动态均值、不确定性和事件窗口 | `time-series-ribbon` | 区分观测波动、置信区间和预测区间 |
+| 时间序列与积分总量组合图 | 比较多个方法的瞬时速率轨迹及其时间积分 | `time-series-summary-combo` | 总量必须由同一时序数据和明确积分规则计算；不同类别横轴应分面显示 |
 | 三维散点 | 三个真实坐标维度下的样本几何关系 | `3d-scatter` | 需配合视角、透明度或 2D 投影核查遮挡 |
 
 校准图与 PR 图的统计含义参考 scikit-learn 官方用户指南：校准图横轴是平均预测概率、纵轴是对应组的阳性比例，PR 图用于在类别不平衡时观察 precision/recall 的权衡。[Calibration curves](https://scikit-learn.org/stable/modules/calibration.html) · [Precision–recall example](https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html)
@@ -42,7 +43,7 @@ Kaplan–Meier 的拟合对象、置信区间和生存函数绘图接口参考 l
 | 组学富集轨迹 | GSEA running score、enrichment map、dot plot | 排名基因列表中的集合富集和峰值位置 | `gsea-curve` 与富集点图已内置 |
 | 组学与遗传统计 | volcano、Manhattan、MA、染色体轨迹、clustergram | 差异、全基因组信号、表达与聚类 | volcano、Manhattan、热图已内置；MA 待定制 |
 | 层级与组成 | sunburst、treemap、icicle、Sankey、parallel categories、ternary | 层级占比、状态流向、组成关系 | Sankey、ternary、parallel、treemap、sunburst 已内置；icicle 待定制 |
-| 时间序列与金融 | 折线/带状、事件时间线、waterfall、OHLC、candlestick | 动态变化、贡献分解、价格与交易区间 | `event-timeline`、waterfall、`ohlc-candlestick` 已内置 |
+| 时间序列与金融 | 折线/带状、积分总量组合、事件时间线、waterfall、OHLC、candlestick | 动态变化、累计量、贡献分解、价格与交易区间 | `time-series-ribbon`、`time-series-summary-combo`、`event-timeline`、waterfall、`ohlc-candlestick` 已内置 |
 | 空间与网络 | choropleth、点地图、网络、弦图、circos | 地理分布、节点关系、跨组连接 | 地图、网络、弦图已有 |
 
 Plotly 官方 Python 分类页也将 scientific、statistical、financial、map、AI/ML 和 3D 图形分开组织，并提供 box/violin/ECDF、parallel categories、contour 等统计图族，可作为后续定制模板的候选清单。[Plotly Python chart types](https://plotly.com/python/) · [Statistical charts](https://plotly.com/python/statistical-charts/)

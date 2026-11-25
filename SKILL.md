@@ -1,6 +1,6 @@
 ---
 name: scientific-data-visualization
-description: "Use this skill for data-driven scientific visualizations: selecting or reviewing an appropriate chart type, reproducing built-in scientific figure templates, or creating custom research plots. Especially applies to 科研绘图模板, 3D柱阵/响应面/散点/体数据/向量场, 混淆矩阵, Bland–Altman一致性图, MA图, 富集点图, Treemap/Sunburst, 瀑布图, 时间序列置信带, 事件时间线, OHLC/K线, DET与学习曲线, GSEA曲线, SHAP蜂群柱状图, 配对云雨图, 交叉验证ROC, PR与校准曲线, 生存曲线, 残差诊断, 曼哈顿图, 泰勒图, 相关矩阵组合图, 预测真实值边缘分布图, TPE调参3D曲面, 下三角相关矩阵半边小提琴图, 分组环形热图, 城市公园降温组合图, Nature和弦图, 热图, 火山图, 降维图, or 数据可视化选图. It does not cover editable conceptual diagrams, which belong to scibox-diagram."
+description: "Use this skill for data-driven scientific visualizations: selecting or reviewing an appropriate chart type, reproducing built-in scientific figure templates, or creating custom research plots. Especially applies to 科研绘图模板, 3D柱阵/响应面/散点/体数据/向量场, 混淆矩阵, Bland–Altman一致性图, MA图, 富集点图, Treemap/Sunburst, 瀑布图, 时间序列置信带与积分总量组合图, 事件时间线, OHLC/K线, DET与学习曲线, GSEA曲线, SHAP蜂群柱状图, 配对云雨图, 交叉验证ROC, PR与校准曲线, 生存曲线, 残差诊断, 曼哈顿图, 泰勒图, 相关矩阵组合图, 预测真实值边缘分布图, TPE调参3D曲面, 下三角相关矩阵半边小提琴图, 分组环形热图, 城市公园降温组合图, Nature和弦图, 热图, 火山图, 降维图, or 数据可视化选图. It does not cover editable conceptual diagrams, which belong to scibox-diagram."
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob
 ---
 
@@ -120,6 +120,7 @@ after this handoff is available.
 - `treemap-hierarchy`
 - `waterfall-contribution`
 - `time-series-ribbon`
+- `time-series-summary-combo`
 - `3d-scatter`
 - `3d-volume`
 - `3d-vector-field`

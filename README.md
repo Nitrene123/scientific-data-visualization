@@ -2,14 +2,14 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-A reproducible Agent Skill for scientific data visualization with 51 runnable Matplotlib templates, chart-selection guidance, a shared paper-inspired style, and PNG/PDF/SVG export.
+A reproducible Agent Skill for scientific data visualization with 52 runnable Matplotlib templates, chart-selection guidance, a shared paper-inspired style, and PNG/PDF/SVG export.
 
 ## Features
 
 - Covers comparison, distribution, correlation, dimensionality reduction, model evaluation, survival analysis, omics, time series, spatial/network data, and 3D data.
 - Includes 3D bar matrices, heatmap projections, response surfaces, 3D scatter, volume, and vector-field templates; use 3D only when the third dimension has a real scientific meaning.
 - Applies shared paper-inspired typography, axes, grid, and categorical colors while retaining semantic sequential and diverging maps.
-- Includes deterministic example data, 51 preview images, and reproducible scripts that export PNG, PDF, and SVG.
+- Includes deterministic example data, 52 preview images, and reproducible scripts that export PNG, PDF, and SVG.
 - Includes faceted benchmark strips with raw replicate points, bivariate mean intervals, and optional log-scaled x-axes; independent replicates are not joined by lines.
 - Provides chart-selection boundaries and scientific figure quality-control guidance.
 
@@ -75,7 +75,7 @@ Agent Skills-compatible implementations typically read `name` and `description` 
 - Check that `SKILL.md` is directly inside the skill directory, not nested under an extra repository directory.
 - Start a new session or restart the Agent so it rescans the skills directory.
 - Smoke-test with: “Use the scientific data visualization skill to create a 3D bar matrix with a heatmap projection.”
-- Run `python scripts/render_template.py --list` to confirm that all 51 templates are visible.
+- Run `python scripts/render_template.py --list` to confirm that all 52 templates are visible.
 
 ## Template categories
 
@@ -86,7 +86,7 @@ Agent Skills-compatible implementations typically read `name` and `description` 
 | Omics and dimensionality reduction | `expression-heatmap`, `volcano-plot`, `manhattan-plot`, `gsea-curve`, `umap-clusters`, `ordination-pcoa` |
 | Classification and model evaluation | `confusion-matrix`, `cv-roc-ci`, `precision-recall-curve`, `calibration-reliability`, `det-curve`, `learning-curve` |
 | Composition, flow, and hierarchy | `sankey-flow`, `nature-chord-diagram`, `treemap-hierarchy`, `sunburst-hierarchy`, `upset-plot`, `waterfall-contribution` |
-| Time, spatial, and network data | `time-series-ribbon`, `event-timeline`, `survival-km`, `spatial-map`, `network-graph`, `ohlc-candlestick` |
+| Time, spatial, and network data | `time-series-ribbon`, `time-series-summary-combo`, `event-timeline`, `survival-km`, `spatial-map`, `network-graph`, `ohlc-candlestick` |
 | 3D and multivariate data | `3d-bar-heatmap`, `3d-bar-heat-projection`, `3d-response-surface`, `3d-scatter`, `3d-volume`, `3d-vector-field`, `parallel-coordinates`, `radar-profile`, `ternary-composition` |
 | Diagnostics and composite figures | `residual-diagnostics`, `taylor-diagram`, `multiclass-shap-combo`, `prediction-marginal-grid`, `rf-tpe-surface`, `urban-park-cooling-combo`, `grouped-circular-heatmap`, `grouped-corr-split-violin` |
 
@@ -94,7 +94,7 @@ See `references/figure-catalog.md` and `references/visualization-catalog.md` for
 
 ## Template preview gallery
 
-The thumbnails below correspond directly to the 51 preview files in `assets/previews/`; click an image to open the original file.
+The thumbnails below correspond directly to the 52 preview files in `assets/previews/`; click an image to open the original file.
 
 <table>
 <tr>
@@ -169,6 +169,7 @@ The thumbnails below correspond directly to the 51 preview files in `assets/prev
 </tr>
 <tr>
 <td><a href="assets/previews/faceted_errorbar_strip_replica.png"><img src="assets/previews/faceted_errorbar_strip_replica.png" alt="faceted-errorbar-strip" width="180"></a><br><sub><code>faceted-errorbar-strip</code></sub></td>
+<td><a href="assets/previews/time_series_summary_combo_replica.png"><img src="assets/previews/time_series_summary_combo_replica.png" alt="time-series-summary-combo" width="180"></a><br><sub><code>time-series-summary-combo</code></sub></td>
 </tr>
 </table>
 
